@@ -1,10 +1,10 @@
 # Work Log
 
-## GROUP MEMBER 1
+## Rahman, Bushra
 
-### date x
+### 5/22/23
 
-info
+-Created a personal branch
 
 ### date y
 
