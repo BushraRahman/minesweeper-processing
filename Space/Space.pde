@@ -1,4 +1,4 @@
-public class Space{
+
   String type;
   boolean flag;
   boolean uncovered;
@@ -11,4 +11,3 @@ public class Space{
   public boolean getUncovered(){}
   public void changeUncovered(){}
   public void drawSquare(int x, int y){}
-  }
