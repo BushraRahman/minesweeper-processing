@@ -11,11 +11,11 @@ info
 info
 
 
-## GROUP MEMBER 2
+## Que, Danielle
 
-### date x
+### May 22
 
-info
+- Created personal branch
 
 ### date y
 
