@@ -1,5 +1,7 @@
 void setup(){
-  size(400,400);
+  size(370,310);
+  Board a = new Board();
+  a.drawBoard();
 }
 /*
 Space a = new Space();

@@ -11,10 +11,10 @@ public class Space{
   
   public String getType(){
     return type;
-  }/*
-  public void changeType(String new){
-    type = new;
-  }*/
+  }
+  public void changeType(String New){
+    type = New;
+  }
   public void changeAdjacent(int adj){
     adjacent = adj;
   }
@@ -47,7 +47,7 @@ public class Space{
       if(type.equals("safe")){
         if(adjacent!=0){
           textSize(size);
-          text(adjacent,x,y);
+          text(adjacent,x,y); 
   }
       }
     }
