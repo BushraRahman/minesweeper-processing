@@ -1,12 +1,14 @@
-
+public class Space{
   private String type;
   private boolean flag;
   private boolean uncovered;
   private int adjacent;
+  
   public Space(){
     flag = false;
     uncovered = true;
   }
+  
   public String getType(){
     return type;
   }/*
