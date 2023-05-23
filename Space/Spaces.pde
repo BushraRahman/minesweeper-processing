@@ -1,4 +1,4 @@
-public class Space{
+
   private String type;
   private boolean flag;
   private boolean uncovered;
@@ -13,7 +13,9 @@ public class Space{
   public void changeType(String new){
     type = new;
   }*/
-  public void changeAdjacent(){}
+  public void changeAdjacent(int adj){
+    adjacent = adj;
+  }
   public int getAdjacent(){
     return adjacent;
   }
@@ -31,5 +33,21 @@ public class Space{
     }
   }
   
-  public void drawSquare(int x, int y){}
+  public void drawSquare(int x, int y, int size){
+    square(x,y,size);
+    if(uncovered && flag){
+        rect(x,y,size/2,size-10);
+    }
+    else if (!uncovered){
+      if(type.equals("mine")){
+        circle(x,y,size);
+      }
+      if(type.equals("safe")){
+        if(adjacent!=0){
+          textSize(size);
+          text(adjacent,x,y);
+  }
+      }
+    }
+}
 }
