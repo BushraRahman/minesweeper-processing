@@ -1,6 +1,5 @@
 void setup(){
   size(400,400);
-<<<<<<< HEAD
 }
 /*
 Space a = new Space();
@@ -27,4 +26,3 @@ a.changeFlag();
 //a.uncover();
 a.drawSquare(x,y,size);
 }
->>>>>>> bushra
