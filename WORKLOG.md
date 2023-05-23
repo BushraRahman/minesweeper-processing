@@ -13,10 +13,10 @@ info
 
 ## Que, Danielle
 
-### May 22
+### 5/22/23
 
 - Created personal branch
 
-### date y
+### 5/23/23
 
-info
+- Working on Board class, developing constructor
