@@ -2,9 +2,10 @@
 
 ## Rahman, Bushra
 
-### 5/22/23
+### May 22
 
 -Created a personal branch
+-Added variables and untested methods to Space class
 
 ### date y
 

@@ -7,13 +7,14 @@ public class Space{
   public Space(){
     flag = false;
     uncovered = true;
+    type = "undefined";
   }
   
   public String getType(){
     return type;
   }
-  public void changeType(String New){
-    type = New;
+  public void changeType(String type){
+    this.type = type;
   }
   public void changeAdjacent(int adj){
     adjacent = adj;
@@ -35,19 +36,37 @@ public class Space{
     }
   }
   
+
+  /*For now:
+  flag is a red rectangle
+  mine is a red circle
+  */
   public void drawSquare(int x, int y, int size){
+    fill(255,203,164);
     square(x,y,size);
+    noFill();
     if(uncovered && flag){
-        rect(x,y,size/2,size-10);
+        rectMode(CENTER);
+        fill(255,0,0);
+        rect(x+size/2,y+size/2,size/2,size-10);
+        noFill();
+        rectMode(CORNER);
     }
     else if (!uncovered){
       if(type.equals("mine")){
-        circle(x,y,size);
+        ellipseMode(CENTER);
+        fill(255,0,0);
+        circle(x+size/2,y+size/2,size/2);
+        noFill();
       }
-      if(type.equals("safe")){
+      if(type.equals("notMine")){
         if(adjacent!=0){
+          System.out.println("!!");
           textSize(size);
-          text(adjacent,x,y); 
+          fill(0);
+          textAlign(CENTER);
+          text(adjacent,x+size/2,y+size-2);
+          fill(255);
   }
       }
     }
