@@ -13,6 +13,7 @@ public class Board{
     mineCount = 40;
     gameOver = false;
     gameWon = false;
+    
   }
   
   private Space[][] makeBoard(int Width, int Height){
