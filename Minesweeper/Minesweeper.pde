@@ -25,3 +25,5 @@ a.changeFlag();
 //a.uncover();
 a.drawSquare(x,y,size);
 }
+
+void draw(){}

@@ -7,9 +7,12 @@
 -Created a personal branch
 -Added variables and untested methods to Space class
 
-### date y
+### May 23
 
-info
+-Tested methods in Space class
+-Fixed drawSquare()
+-Changed variable name in Space
+-Added variables, constructor, and the beginning of mouseClicked to Game
 
 
 ## Que, Danielle
@@ -21,3 +24,7 @@ info
 ### 5/23/23
 
 - Working on Board class, developing constructor
+
+### 5/24/23
+
+- Fixed issues with merging.
