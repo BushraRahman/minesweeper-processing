@@ -1,14 +1,15 @@
 public class Space{
   private String type;
   private boolean flag;
-  private boolean covered;
+  private boolean uncovered;
   private int adjacent;
   
   public Space(){
     flag = false;
-    covered = true;
+    uncovered = true;
     type = "undefined";
   }
+  
   public String getType(){
     return type;
   }
@@ -21,12 +22,11 @@ public class Space{
   public int getAdjacent(){
     return adjacent;
   }
-  public boolean getCovered(){
-    return covered;
+  public boolean getUncovered(){
+    return uncovered;
   }
   public void uncover(){
-    covered = false;
-    //should add drawSquare to this
+    uncovered = false;
   }
   public void changeFlag(){
     if (flag){
@@ -45,14 +45,14 @@ public class Space{
     fill(255,203,164);
     square(x,y,size);
     noFill();
-    if(covered && flag){
+    if(uncovered && flag){
         rectMode(CENTER);
         fill(255,0,0);
         rect(x+size/2,y+size/2,size/2,size-10);
         noFill();
         rectMode(CORNER);
     }
-    else if (!covered){
+    else if (!uncovered){
       if(type.equals("mine")){
         ellipseMode(CENTER);
         fill(255,0,0);
