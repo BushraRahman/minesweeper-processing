@@ -1,7 +1,7 @@
 double accuracy;
 int gamesPlayed;
 int sizeSquare;
-boolean squareClicked;
+boolean spaceClicked;
 int offsetX;
 int offsetY;
 void setup(){
@@ -13,7 +13,8 @@ void setup(){
 void draw(){}
 void mouseClicked(){
   Space square = board[(mouseY+offsetY)/sizeSquare][(mouseX+offsetX)/sizeSquare];
-  if(!squareClicked){
+  if(!spaceClicked){
+    square.changeType("notMine");
     board.placeMines();
     //make placeMines have 2 params so that you can tell which square can't be a mine
   }
