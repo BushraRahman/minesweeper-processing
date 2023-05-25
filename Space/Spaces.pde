@@ -3,6 +3,9 @@ public class Space{
   private boolean flag;
   private boolean uncovered;
   private int adjacent;
+  private int x;
+  private int y;
+  private int size;
   
   public Space(){
     flag = false;
@@ -27,6 +30,7 @@ public class Space{
   }
   public void uncover(){
     uncovered = false;
+    drawSquare();
   }
   public void changeFlag(){
     if (flag){
@@ -41,7 +45,7 @@ public class Space{
   flag is a red rectangle
   mine is a red circle
   */
-  public void drawSquare(int x, int y, int size){
+  public void drawSquare(){
     fill(255,203,164);
     square(x,y,size);
     noFill();

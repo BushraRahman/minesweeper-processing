@@ -55,3 +55,13 @@ public class Board {
     }
     board[y][x].changeAdjacent(adj);
   }
+  void displayMines(){
+    for (int i = 0; i < board.length; i++){
+      for (int j = 0; j < board[0].length; j++){
+        if(board[i][j].getType.equals("mine")){
+          board[i][j].uncover();
+        }
+      }
+    }
+  }
+}
