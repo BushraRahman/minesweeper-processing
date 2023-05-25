@@ -14,6 +14,8 @@
 -Changed variable name in Space
 -Added variables, constructor, and the beginning of mouseClicked to Game
 
+### May 24
+-Made untested versions of the methods countAdjacent and placeMines in Board class
 
 ## Que, Danielle
 
