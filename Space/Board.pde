@@ -1,6 +1,16 @@
 public class Board {
-  void placeMines(int x, int y) {
+  void placeMines() {
+    Space space;
+    for (int i = 0; i < mineCount; i++){
+      space = board[Math.random()*(bHeight+1)][Math.random()*(bWidth+1)];
+      if(space.getType.equals("undefined")){
+        space.changeType("mine");
+      }else{
+        i--;
+      }
+    }
   }
+    
   void countAdjacent(int x, int y) {
     int adj = 0;
     if (x!=0) {
@@ -43,4 +53,5 @@ public class Board {
         }
       }
     }
+    board[y][x].changeAdjacent(adj);
   }
