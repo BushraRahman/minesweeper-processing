@@ -18,7 +18,7 @@ public class Board {
     for (int i = 0; i < board.length; i++){
       for (int j = 0; j < board[0].length; j++){
         board[i][j] = new Space();
-        board[i][j].drawSquare();
+        board[i][j].drawSquare(i*10,j*10,10);
   }
     }
   }

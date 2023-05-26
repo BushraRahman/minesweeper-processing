@@ -6,10 +6,12 @@ int offsetX;
 int offsetY;
 Board board;
 void setup(){
+  size(400,400);
   board = new Board(15,20);
   spaceClicked = false;
   offsetX = 100;
   offsetY = 0;
+  sizeSquare=10;
 }
 void draw(){}
 void mouseClicked(){
@@ -27,7 +29,7 @@ void mouseClicked(){
   }else{
     board.countAdjacent((mouseY+offsetY)/sizeSquare,(mouseX+offsetX)/sizeSquare);
     if(square.getAdjacent() == 0){
-      board.uncoverAdjacent();
+      //board.uncoverAdjacent();
     //make uncoveredAjacent have 2 params so that you know where you're starting from
   }
   }

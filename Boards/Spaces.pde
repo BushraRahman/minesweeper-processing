@@ -11,6 +11,7 @@ public class Space{
     flag = false;
     uncovered = true;
     type = "undefined";
+    size = 10;
   }
   
   public String getType(){
@@ -46,6 +47,36 @@ public class Space{
   mine is a red circle
   */
   public void drawSquare(){
+    fill(255,203,164);
+    square(x,y,size);
+    noFill();
+    if(uncovered && flag){
+        rectMode(CENTER);
+        fill(255,0,0);
+        rect(x+size/2,y+size/2,size/2,size-10);
+        noFill();
+        rectMode(CORNER);
+    }
+    else if (!uncovered){
+      if(type.equals("mine")){
+        ellipseMode(CENTER);
+        fill(255,0,0);
+        circle(x+size/2,y+size/2,size/2);
+        noFill();
+      }
+      if(type.equals("notMine")){
+        if(adjacent!=0){
+          System.out.println("!!");
+          textSize(size);
+          fill(0);
+          textAlign(CENTER);
+          text(adjacent,x+size/2,y+size-2);
+          fill(255);
+  }
+      }
+    }
+}
+public void drawSquare(int x, int y, int size){
     fill(255,203,164);
     square(x,y,size);
     noFill();
