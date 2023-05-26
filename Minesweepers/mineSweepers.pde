@@ -1,4 +1,4 @@
-//testingg
+//testing
 double accuracy;
 int gamesPlayed;
 int sizeSquare;
