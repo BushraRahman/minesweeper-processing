@@ -1,4 +1,3 @@
-//testingg
 double accuracy;
 int gamesPlayed;
 int sizeSquare;
@@ -6,31 +5,32 @@ boolean spaceClicked;
 int offsetX;
 int offsetY;
 Board board;
+
 void setup(){
-  size(400,400);
-  board = new Board(15,20);
+  board = new Board(18,15);
   spaceClicked = false;
   offsetX = 100;
   offsetY = 0;
-  sizeSquare=10;
 }
+
 void draw(){}
+
 void mouseClicked(){
-  Space square = board.returnBoard()[(mouseY+offsetY)/sizeSquare][(mouseX+offsetX)/sizeSquare];
+  Space square = board[(mouseY+offsetY)/sizeSquare][(mouseX+offsetX)/sizeSquare];
   if(!spaceClicked){
     square.changeType("notMine");
     board.placeMines();
     //make placeMines have 2 params so that you can tell which square can't be a mine
   }
-  if(square.getUncovered()){
+  if(square.getCovered()){
     square.uncover();
   }
-  if (square.getType().equals("mine")){
+  if (square.getType.equals("mine")){
     board.displayMines();
   }else{
-    board.countAdjacent((mouseY+offsetY)/sizeSquare,(mouseX+offsetX)/sizeSquare);
+    board.countAdjacent();
     if(square.getAdjacent() == 0){
-      //board.uncoverAdjacent();
+      board.uncoverAdjacent();
     //make uncoveredAjacent have 2 params so that you know where you're starting from
   }
   }
