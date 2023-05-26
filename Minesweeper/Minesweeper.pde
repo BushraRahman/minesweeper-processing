@@ -16,7 +16,8 @@ void setup(){
 void draw(){}
 
 void mouseClicked(){
-  Space square = board[(mouseY+offsetY)/sizeSquare][(mouseX+offsetX)/sizeSquare];
+  //Space square = board[(mouseY+offsetY)/sizeSquare][(mouseX+offsetX)/sizeSquare];
+  Space square = board.getSpace((mouseY+offsetY)/sizeSquare, (mouseX+offsetX)/sizeSquare);
   if(!spaceClicked){
     square.changeType("notMine");
     board.placeMines();
