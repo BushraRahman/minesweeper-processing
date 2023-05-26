@@ -37,6 +37,7 @@
 ### May 26
 - Recreated folder and files to match Folder and File names
 - Fixed Board class
+- Finally got merging to work
 
 
 
