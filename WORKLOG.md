@@ -26,9 +26,18 @@
 ## Que, Danielle
 
 ### May 22
-
 - Created personal branch
 
-### date y
+### May 23
+- Created Board Class, added Constructor and 2 helper methods
 
-info
+### May 24-25
+- Attempted to fix merging issues
+
+### May 26
+- Recreated folder and files to match Folder and File names
+- Fixed Board class
+
+
+
+
