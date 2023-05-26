@@ -17,6 +17,12 @@
 ### May 24
 -Made untested versions of the methods countAdjacent and placeMines in Board class
 
+### May 25
+-Made untested version of displayMines in Board class
+-Overloaded drawSquare and edited the Space class so that drawSquare() can work properly
+-Testing mouseClicked() in Game class
+-Fixed some errors in mouseClicked() in Game class
+
 ## Que, Danielle
 
 ### May 22
