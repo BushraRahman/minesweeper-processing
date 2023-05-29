@@ -13,6 +13,15 @@ public class Space{
     type = "undefined";
     size = 10;
   }
+  public Space(int x, int y, int size){
+    flag = false;
+    uncovered = true;
+    type = "undefined";
+    size = 10;
+    this.x = x;
+    this.y = y;
+    this.size = size;
+  }
   
   public String getType(){
     return type;
@@ -65,6 +74,7 @@ public class Space{
         noFill();
       }
       if(type.equals("notMine")){
+        System.out.println("!!");
         if(adjacent!=0){
           System.out.println("!!");
           textSize(size);
@@ -77,6 +87,9 @@ public class Space{
     }
 }
 public void drawSquare(int x, int y, int size){
+  this.x = x;
+  this.y = y;
+  this.size = size;
     fill(255,203,164);
     square(x,y,size);
     noFill();

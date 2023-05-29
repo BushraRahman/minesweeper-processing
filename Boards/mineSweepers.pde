@@ -17,13 +17,19 @@ void setup(){
 }
 void draw(){}
 void mouseClicked(){
-  Space square = board.returnBoard()[(mouseY+offsetY)/sizeSquare][(mouseX+offsetX)/sizeSquare];
+  int yCor = (mouseY+offsetY)/sizeSquare;
+  int xCor = (mouseX+offsetY)/sizeSquare;
+  System.out.println(yCor);
+  System.out.println(xCor);
+  Space square = board.returnBoard()[yCor][xCor];
   if(!spaceClicked){
     square.changeType("notMine");
     board.placeMines();
     //make placeMines have 2 params so that you can tell which square can't be a mine
   }
   if(square.getUncovered()){
+    System.out.println("it's uncovered!");
+    board.countAdjacent((mouseY+offsetY)/sizeSquare,(mouseX+offsetX)/sizeSquare);
     square.uncover();
   }
   if (square.getType().equals("mine")){
