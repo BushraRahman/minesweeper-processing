@@ -50,6 +50,7 @@ public class Space{
     }else{
       flag = true;
     }
+    drawSquare();
   }
   
 
@@ -70,12 +71,16 @@ public class Space{
     }
     else if (!uncovered){
       if(type.equals("mine")){
+        fill(0);
+        square(x,y,size);
         ellipseMode(CENTER);
         fill(255,0,0);
         circle(x+size/2,y+size/2,size/2);
         noFill();
       }
       if(type.equals("notMine")){
+        fill(255);
+        square(x,y,size);
         if(adjacent!=0){
           textSize(size);
           fill(0);
@@ -102,6 +107,8 @@ public void drawSquare(int x, int y, int size){
     }
     else if (!uncovered){
       if(type.equals("mine")){
+        fill(255);
+        square(x,y,size);
         ellipseMode(CENTER);
         fill(255,0,0);
         circle(x,y+size,size/2);
@@ -109,6 +116,8 @@ public void drawSquare(int x, int y, int size){
       }
       if(type.equals("notMine")){
         if(adjacent!=0){
+          fill(255);
+          square(x,y,size);
           textSize(size);
           fill(0);
           textAlign(CENTER);
