@@ -51,4 +51,5 @@
 - Updated main (cleaned it up so only the Board folder is in there)
 - Doubled size of the board
 - Starting to work on uncovering adjacent feature
+- Changed visuals of uncovering and mines for ease
 
