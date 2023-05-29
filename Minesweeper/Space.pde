@@ -11,6 +11,7 @@ public class Space{
     flag = false; 
     uncovered = true;
     type = "undefined";
+    size = 10;
   }
   
   public String getType(){
