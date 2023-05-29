@@ -30,8 +30,7 @@ void mouseClicked() {
       square.changeType("notMine");
       board.placeMines();
       spaceClicked = true;
-    }
-    if (square.getUncovered()) {
+    }if (square.getUncovered()) {
       System.out.println("it's uncovered!");
       System.out.println("uncovered"+yCor);
       if (square.getType().equals("notMine")) {
@@ -46,6 +45,12 @@ void mouseClicked() {
         gameOver = true;
       }
       square.uncover();
+    }else {
+      if (keyPressed == true){
+        if (key == 'f'){
+          square.changeFlag();
+        }
+      }
     }
     if (board.gameOver) {
       //board = new Board(15, 20);
