@@ -74,9 +74,7 @@ public class Space{
         noFill();
       }
       if(type.equals("notMine")){
-        System.out.println("!!");
         if(adjacent!=0){
-          System.out.println("!!");
           textSize(size);
           fill(0);
           textAlign(CENTER);
@@ -109,7 +107,6 @@ public void drawSquare(int x, int y, int size){
       }
       if(type.equals("notMine")){
         if(adjacent!=0){
-          System.out.println("!!");
           textSize(size);
           fill(0);
           textAlign(CENTER);

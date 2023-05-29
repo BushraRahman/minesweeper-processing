@@ -6,6 +6,8 @@ public class Board {
   boolean gameOver;
   public Board(){
     board = new Space[30][10];
+    bHeight = 30;
+    bWidth = 10;
     for (int i = 0; i < board.length; i++){
       for (int j = 0; j < board[0].length; j++){
         board[i][j] = new Space();
@@ -15,6 +17,8 @@ public class Board {
   }
   public Board(int bWidth, int bHeight){
     board = new Space[bHeight][bWidth];
+    this.bHeight = bHeight;
+    this.bWidth = bWidth;
     for (int i = 0; i < board.length; i++){
       for (int j = 0; j < board[0].length; j++){
         board[i][j] = new Space();
@@ -35,6 +39,8 @@ public class Board {
   }
     
   void countAdjacent(int x, int y) {
+    System.out.println(y);
+    System.out.println(x);
     int adj = 0;
     if (x!=0) {
       if (board[y][x-1].getType().equals("mine")) {
@@ -61,7 +67,7 @@ public class Board {
           adj++;
       }
     }
-    if (x!=bWidth) {
+    if (x!=bWidth-1) {
       if (board[y][x+1].getType().equals("mine")) {
         adj++;
       }
