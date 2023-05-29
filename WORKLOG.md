@@ -47,6 +47,8 @@
 - Fixed Board class
 - Finally got merging to work
 
-
-
+### May 29
+- Updated main (cleaned it up so only the Board folder is in there)
+- Doubled size of the board
+- Starting to work on uncovering adjacent feature
 
