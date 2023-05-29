@@ -23,6 +23,14 @@
 -Testing mouseClicked() in Game class
 -Fixed some errors in mouseClicked() in Game class
 
+### May 26 (classwork)
+-Made folder with another name because case-sensitive path error was interfering with pushing and pulling
+
+### May 29
+-Fixed run-time errors when clicking certain Spaces by modifying the Board constructor, countAdjacent, and mouseClicked
+-Fixed the method placeMines
+-The above changes means that the user can now click on Spaces and the Spaces change their look different depending on if they're a mine or not
+
 ## Que, Danielle
 
 ### May 22

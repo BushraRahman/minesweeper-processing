@@ -29,24 +29,14 @@ public class Board {
     for (int r = 0; r < board.length; r++){
       for (int c = 0; c < board[r].length; c++){
         board[r][c] = new Space();
-        /*if (Math.random() < mineCount) {
+        if (Math.random() < mineCount) {
             board[r][c].changeType("mine");
           } else {
             board[r][c].changeType("notMine");
-          }*/
-         
+          }
       }
     }
     return board;
-  }
-  
-  
-  public void drawBoard(){
-    for (int r = 0; r < board.length; r++){
-      for (int c = 0; c < board[r].length; c++){
-        board[r][c].drawSquare(c * 20,r * 20,20);
-      }
-    }
   }
   
   void placeMines() {
@@ -111,6 +101,19 @@ public class Board {
         if(board[i][j].getType.equals("mine")){
           board[i][j].uncover();
         }
+      }
+    }
+  }
+  
+  Space getSpace(int r, int c){
+    return board[r][c];
+  }
+  
+  //Old drawBoard, was used for testing purposes before
+  public void drawBoard(){
+    for (int r = 0; r < board.length; r++){
+      for (int c = 0; c < board[r].length; c++){
+        board[r][c].drawSquare(c * 20,r * 20,20);
       }
     }
   }
