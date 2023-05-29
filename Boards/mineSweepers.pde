@@ -29,7 +29,7 @@ void mouseClicked() {
     if (!spaceClicked) {
       square.changeType("notMine");
       board.placeMines();
-      //make placeMines have 2 params so that you can tell which square can't be a mine
+      spaceClicked = true;
     }
     if (square.getUncovered()) {
       System.out.println("it's uncovered!");
@@ -51,10 +51,6 @@ void mouseClicked() {
       //board = new Board(15, 20);
     }
   }
-  Space test = new Space(10,10,20);
-  test.changeType("mine");
-  test.uncover();
-  test.drawSquare();
 }
 
 void keyPressed() {

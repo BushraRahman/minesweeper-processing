@@ -82,7 +82,7 @@ public class Space{
           textSize(size);
           fill(0);
           textAlign(CENTER);
-          text(adjacent,x+size/2,y+size/2);
+          text(adjacent,x+size/2,y+size);
           fill(255);
   }
       }
