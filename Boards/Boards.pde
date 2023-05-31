@@ -5,6 +5,7 @@ public class Board {
   int mineCount;
   boolean gameOver;
   int coveredSafe;
+  boolean gameWon;
   public Board() {
     board = new Space[30][10];
     bHeight = 30;
