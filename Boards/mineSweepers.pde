@@ -6,45 +6,54 @@ int sizeSquare;
 boolean spaceClicked;
 int offsetX;
 int offsetY;
-boolean gameOver;
+boolean optCollapsed;
+int optX;
+int optY;
+int optSizeX;
+int optSizeY;
 Board board;
 void setup() {
-  size(300, 400);
-  board = new Board(15, 20);
+  size(500, 500);
+   offsetX = 0;
+  offsetY = 20;
+  board = new Board(5, 5,23);
   spaceClicked = false;
-  offsetX = 100;
-  offsetY = 0;
   sizeSquare=20;
+  optCollapsed = true;
+  drawButton();
 }
 void draw() {
 }
 void mouseClicked() {
-  int yCor = (mouseY+offsetY)/sizeSquare;
-  int xCor = (mouseX+offsetY)/sizeSquare;
-  System.out.println("yCor"+yCor+"????");
-  System.out.println("xCor"+xCor+"?????");
+  if (!board.gameOver){
+  int yCor = (mouseY-offsetY)/sizeSquare;
+  int xCor = (mouseX-offsetX)/sizeSquare;
   if (yCor < board.bHeight && xCor < board.bWidth) {
     Space square = board.returnBoard()[yCor][xCor];
-    System.out.println(square.getType());
     if (mouseButton == LEFT) {
       if (!spaceClicked) {
         square.changeType("notMine");
         board.placeMines();
         spaceClicked = true;
+        board.displayMines();
       }
       if (square.getUncovered()) {
-        System.out.println("it's uncovered!");
-        System.out.println("uncovered"+yCor);
         if (square.getType().equals("notMine")) {
           board.countAdjacent(xCor, yCor);
-          System.out.println("neighbors"+square.getAdjacent());
+          board.coveredSafe--;
+          if(board.coveredSafe==0){
+            fill(0);
+            text("Game Won",20,10);
+            noFill();
+            board.gameOver = true;
+          }
           if (square.getAdjacent() == 0) {
             //board.uncoverAdjacent();
             //make uncoveredAjacent have 2 params so that you know where you're starting from
           }
         } else {
-          board.displayMines();
-          gameOver = true;
+         board.displayMines();
+          board.gameOver = true;
         }
         square.uncover();
       } else {
@@ -65,6 +74,11 @@ void mouseClicked() {
     }
   }
 }
+else{
+  board = new Board(board.bWidth, board.bHeight,board.mineCount);
+  spaceClicked = false;
+}
+}
 
 void keyPressed() {
   if (key == 'a') {
@@ -73,4 +87,12 @@ void keyPressed() {
 }
 
 void custom() {
+}
+void drawButton(){
+  optX = 10;
+  optY = 0;
+  rect(optX,optY,50,15);
+  fill(0);
+  text("Options",optX+2,optY+10);
+  noFill();
 }

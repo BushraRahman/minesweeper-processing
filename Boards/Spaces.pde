@@ -18,8 +18,8 @@ public class Space{
     uncovered = true;
     type = "undefined";
     size = 20;
-    this.x = x;
-    this.y = y;
+    this.x = x+offsetX;
+    this.y = y+offsetY;
     this.size = size;
     drawSquare();
   }

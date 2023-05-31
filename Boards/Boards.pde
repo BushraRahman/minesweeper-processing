@@ -4,6 +4,7 @@ public class Board {
   int bHeight;
   int mineCount;
   boolean gameOver;
+  int coveredSafe;
   public Board() {
     board = new Space[30][10];
     bHeight = 30;
@@ -15,7 +16,7 @@ public class Board {
       }
     }
   }
-  public Board(int bWidth, int bHeight) {
+  public Board(int bWidth, int bHeight, int mineCount) {
     board = new Space[bHeight][bWidth];
     this.bHeight = bHeight;
     this.bWidth = bWidth;
@@ -25,7 +26,10 @@ public class Board {
         //board[i][j].drawSquare(j*10,i*10,10);
       }
     }
-    mineCount = 25;
+    this.mineCount = mineCount;
+    coveredSafe = bWidth*bHeight-mineCount;
+    System.out.println(coveredSafe);
+    gameOver = false;
   }
   void placeMines() {
     Space space;

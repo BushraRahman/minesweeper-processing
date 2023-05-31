@@ -31,6 +31,10 @@
 -Fixed the method placeMines
 -The above changes means that the user can now click on Spaces and the Spaces change their look different depending on if they're a mine or not
 
+### May 30
+-Added a Space having a flag when users click on it
+-Began working on an Options button
+
 ## Que, Danielle
 
 ### May 22
