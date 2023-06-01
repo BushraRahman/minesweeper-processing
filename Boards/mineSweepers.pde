@@ -19,7 +19,7 @@ void setup() {
   size(500, 500);
   offsetX = 0;
   offsetY = 20;
-  board = new Board(16, 16, 40);
+  board = new Board(1, 1, 0);
   spaceClicked = false;
   sizeSquare=20;
   optCollapsed = true;
@@ -129,10 +129,10 @@ void drawGameOver() {
   //PImage img = loadImage("restartButton.png");
   fill(255);
   rectMode(CORNER);
-  restartX=startX+0.5*widthB-0.5*restartWidth;
-  restartY=startY+0.8*heightB-0.5*restartHeight;
   restartWidth=80;
   restartHeight=30;
+  restartX=startX+0.5*widthB-0.5*restartWidth;
+  restartY=startY+0.8*heightB-0.5*restartHeight;
   rect(restartX, restartY, restartWidth, restartHeight);
   fill(0);
   text("RESTART", startX+0.5*widthB, startY+0.8*heightB);
