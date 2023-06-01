@@ -1,3 +1,4 @@
+//needed: method that uncovers most mines
 double accuracy;
 int gamesPlayed;
 int sizeSquare;
@@ -16,10 +17,10 @@ int restartWidth;
 int restartHeight;
 Board board;
 void setup() {
-  size(500, 500);
+  size(325, 345);
   offsetX = 0;
   offsetY = 20;
-  board = new Board(1, 1, 0);
+  board = new Board(2, 1, 1);
   spaceClicked = false;
   sizeSquare=20;
   optCollapsed = true;
@@ -39,16 +40,12 @@ void mouseClicked() {
           square.changeType("notMine");
           board.placeMines();
           spaceClicked = true;
-          //board.displayMines();
         }
         if (square.getUncovered()) {
           if (square.getType().equals("notMine")) {
             board.countAdjacent(xCor, yCor);
             board.coveredSafe--;
             if (board.coveredSafe==0) {
-              fill(0);
-              text("Game Won", 20, 10);
-              noFill();
               board.gameOver = true;
               board.gameWon = true;
             }
@@ -57,7 +54,6 @@ void mouseClicked() {
               //make uncoveredAjacent have 2 params so that you know where you're starting from
             }
           } else {
-            board.displayMines();
             board.gameOver = true;
           }
           square.uncover();
@@ -89,7 +85,8 @@ void mouseClicked() {
     }
   }
   if (board.gameOver && !gameOverShown) {
-    delay(500);
+    board.displayMines();
+    delay(1000);
     drawGameOver();
   }
 }
@@ -126,7 +123,6 @@ void drawGameOver() {
     textAlign(CENTER);
     text("Game Lost", startX+0.5*widthB, startY+0.5*heightB);
   }
-  //PImage img = loadImage("restartButton.png");
   fill(255);
   rectMode(CORNER);
   restartWidth=80;
