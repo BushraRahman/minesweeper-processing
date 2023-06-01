@@ -6,6 +6,7 @@ public class Space{
   private int x;
   private int y;
   private int size;
+  boolean unchecked;
   
   public Space(){
     flag = false;

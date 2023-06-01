@@ -35,6 +35,9 @@
 -Added a Space having a flag when users click on it
 -Began working on an Options button
 
+### May 31
+-Game ends when all non-mines have been clicked on
+-Began working on a game over screen with a restart button
 ## Que, Danielle
 
 ### May 22
