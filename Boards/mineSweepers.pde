@@ -31,7 +31,11 @@ void draw() {
 }
 void mouseClicked() {
   System.out.println(mouseX);
-  if (!board.gameOver) {
+  if (mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY && mouseY <= optY+optSizeY){
+    restart();
+    System.out.println("!!!");
+  }
+  if (!board.gameOver && mouseY>=offsetY && mouseX>=offsetX) {
     int yCor = (mouseY-offsetY)/sizeSquare;
     int xCor = (mouseX-offsetX)/sizeSquare;
     if (yCor < board.bHeight && xCor < board.bWidth) {
@@ -78,13 +82,7 @@ void mouseClicked() {
   }
   if (gameOverShown) {
     if (mouseX >= restartX && mouseX <= restartX+restartWidth && mouseY >= restartY && mouseX <= restartY+restartHeight) {
-      background(66, 179, 139);
-      board = new Board(board.bWidth, board.bHeight, board.mineCount);
-      spaceClicked = false;
-      gameOverShown = false;
-      board.gameOver = false;
-      optCollapsed = true;
-  drawButton();
+      restart();
     }
   }
   if (board.gameOver && !gameOverShown) {
@@ -92,21 +90,14 @@ void mouseClicked() {
     drawGameOver();
   }
 }
-
-void keyPressed() {
-  if (key == 'a') {
-    System.out.println("!!");
-  }
-}
-
-void custom() {
-}
 void drawButton() {
   optX = 10;
   optY = 0;
-  rect(optX, optY, 50, 15);
+  optSizeX = 50;
+  optSizeY = 15;
+  rect(optX, optY, optSizeX, optSizeY);
   fill(0);
-  text("Options", optX+2, optY+10);
+  text("Restart", optX+2, optY+10);
   noFill();
 }
 void drawGameOver() {
@@ -137,4 +128,12 @@ void drawGameOver() {
   text("RESTART", startX+0.5*widthB, startY+0.8*heightB);
   noFill();
   rectMode(CORNER);
+}
+void restart(){
+  background(66, 179, 139);
+  optCollapsed = true;
+  drawButton();
+  board = new Board(16, 16, 40);
+  spaceClicked = false;
+  sizeSquare=20;
 }
