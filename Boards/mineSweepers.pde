@@ -113,7 +113,7 @@ void drawButton() {
   fill(0);
   textAlign(LEFT);
   textSize(12);
-  text("Restart", optX+2, optY+10);
+  text("RESTART", optX+2, optY+10);
   noFill();
 }
 
