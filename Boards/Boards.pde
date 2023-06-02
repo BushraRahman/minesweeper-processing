@@ -46,6 +46,31 @@ public class Board {
       }
     }
   }
+  
+  void uncoverAdjacent(int x, int y){
+    Space selected = board[y][x];
+    countAdjacent(x,y);
+    if (selected.getAdjacent() > 0 && !selected.getType().equals("mine")){
+      selected.uncover();
+      selected.drawSquare();
+    }
+    else if (selected.unchecked==false){
+      if (!selected.getType().equals("mine")) selected.uncover();
+      //countAdjacent(x,y);
+      selected.drawSquare();
+      selected.unchecked=true;
+      if (x > 0 && selected.getType().equals("notMine")) uncoverAdjacent(x - 1,y);
+      if (y > 0 && selected.getType().equals("notMine")) uncoverAdjacent(x,y - 1);
+      if (x < bWidth - 1 && selected.getType().equals("notMine")) uncoverAdjacent(x + 1,y);
+      if (y < bHeight - 1 && selected.getType().equals("notMine")) uncoverAdjacent(x,y + 1);
+      /*selected.uncover();
+      selected.drawSquare();
+      if (x > 0) uncoverAdjacent(x - 1,y);
+      if (y > 0) uncoverAdjacent(x,y - 1);
+      if (x < bWidth - 1) uncoverAdjacent(x + 1,y);
+      if (y < bHeight - 1) uncoverAdjacent(x,y + 1);*/
+    }
+  }
 
   void countAdjacent(int x, int y) {
     int adj = 0;

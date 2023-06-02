@@ -6,6 +6,7 @@ public class Space{
   private int x;
   private int y;
   private int size;
+  boolean unchecked;
   
   public Space(){
     flag = false;
@@ -53,7 +54,6 @@ public class Space{
     drawSquare();
   }
   
-
   /*For now:
   flag is a red rectangle
   mine is a red circle

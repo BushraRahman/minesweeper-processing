@@ -37,7 +37,7 @@ void mouseClicked() {
         board.countAdjacent(xCor, yCor);
         System.out.println("neighbors"+square.getAdjacent());
         if (square.getAdjacent() == 0) {
-          //board.uncoverAdjacent();
+          board.uncoverAdjacent(xCor, yCor);
           //make uncoveredAjacent have 2 params so that you know where you're starting from
         }
       } else {
