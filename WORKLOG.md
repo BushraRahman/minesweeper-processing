@@ -38,6 +38,14 @@
 ### May 31
 -Game ends when all non-mines have been clicked on
 -Began working on a game over screen with a restart button
+
+### June 1
+-Made Game Over screen is centered on board, transparent
+-Restart buttons now work
+-Fixed error where clicking above the board modified the board
+-Added demo feature that reveals most non-mines
+-Cleaned up code: added comments to improve readability, moved and renamed some variables
+
 ## Que, Danielle
 
 ### May 22
