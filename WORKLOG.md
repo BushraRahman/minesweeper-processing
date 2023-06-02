@@ -31,6 +31,21 @@
 -Fixed the method placeMines
 -The above changes means that the user can now click on Spaces and the Spaces change their look different depending on if they're a mine or not
 
+### May 30
+-Added a Space having a flag when users click on it
+-Began working on an Options button
+
+### May 31
+-Game ends when all non-mines have been clicked on
+-Began working on a game over screen with a restart button
+
+### June 1
+-Made Game Over screen is centered on board, transparent
+-Restart buttons now work
+-Fixed error where clicking above the board modified the board
+-Added demo feature that reveals most non-mines
+-Cleaned up code: added comments to improve readability, moved and renamed some variables
+
 ## Que, Danielle
 
 ### May 22
@@ -52,4 +67,10 @@
 - Doubled size of the board
 - Starting to work on uncovering adjacent feature
 - Changed visuals of uncovering and mines for ease
+
+### May 31
+- Working on uncovering adjacent feature
+
+### June 1/2
+- Finished working uncovering adjacent spaces feature
 
