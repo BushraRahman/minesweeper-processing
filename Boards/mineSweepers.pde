@@ -64,7 +64,7 @@ void mouseClicked() {
               board.gameWon = true;
             }
             if (square.getAdjacent() == 0) {
-              //board.uncoverAdjacent(xCor,yCor);
+              board.uncoverAdjacent(xCor,yCor);
             }
             //if the clicked on Space was a mine, the game is over
           } else {
