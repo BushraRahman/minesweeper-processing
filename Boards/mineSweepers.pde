@@ -30,7 +30,7 @@ void setup() {
 void draw() {
 }
 void mouseClicked() {
-  System.out.println(mouseX);
+  //System.out.println(mouseX);
   if (mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY && mouseY <= optY+optSizeY){
     restart();
     System.out.println("!!!");
@@ -139,4 +139,11 @@ void restart(){
   board = new Board(16, 16, 40);
   spaceClicked = false;
   sizeSquare=20;
+  gameOverShown = false;
+}
+
+void keyPressed(){
+  if (keyCode == 's' || keyCode == 'S'){
+    board.showMostSafe();
+  }
 }

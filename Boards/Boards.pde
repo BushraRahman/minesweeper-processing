@@ -109,4 +109,19 @@ public class Board {
   Space[][] returnBoard() {
     return board;
   }
+  void showMostSafe(){
+    for (int i = 0; i < board.length; i++) {
+      for (int j = 0; j < board[0].length; j++) {
+        if (board[i][j].getType().equals("notMine") && board[i][j].uncovered == true && coveredSafe>1) {
+          countAdjacent(j, i);
+            coveredSafe--;
+          board[i][j].uncover();
+        }
+        else if (board[i][j].getType().equals("mine")){
+          board[i][j].changeFlag();
+      }
+    }
+  }
+  System.out.println(coveredSafe);
+}
 }
