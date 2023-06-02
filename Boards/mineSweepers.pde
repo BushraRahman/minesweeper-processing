@@ -13,6 +13,7 @@ float restartX;
 float restartY;
 int restartWidth;
 int restartHeight;
+int unflaggedMines;
 Board board;
 
 void setup() {
@@ -72,13 +73,19 @@ void mouseClicked() {
           square.uncover();
         }
       }
-      //if a covered Space is right clicked, add or remove a flag
+      //if a covered Space is right clicked, add or remove a flag and update the mine count
       if (mouseButton == RIGHT) {
         if (square.getCovered()) {
           square.changeFlag();
-        }
+          if(square.flag){
+            unflaggedMines--;
+        }else{
+          unflaggedMines++;
       }
+      displayMineCount();
+        }
     }
+  }
   }
   /*restarts the game if the game over screen is being shown and the user clicks on the 
   area of the restart button*/
@@ -151,11 +158,30 @@ void drawGame() {
   drawButton();
   board = new Board(16, 16, 40);
   gameOverShown = false;
+  unflaggedMines = 40;
+  displayMineCount();
 }
 
 //demo feature to show winning the game
 void keyPressed() {
   if (keyCode == 's' || keyCode == 'S') {
     board.showMostSafe();
+    unflaggedMines = 0;
+    displayMineCount();
   }
 }
+
+//shows number of mines minus the number of flags
+void displayMineCount(){
+  noStroke();
+  fill(66, 179, 139);
+  rectMode(CORNER);
+  rect(optX+optSizeX+10,optY,70,10);
+  stroke(0);
+  textAlign(LEFT);
+  textSize(13);
+  fill(0);
+  text("Mines: " + unflaggedMines,optX+optSizeX+10,optY+10);
+  noFill();
+}
+  
