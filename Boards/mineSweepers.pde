@@ -19,11 +19,8 @@ void setup() {
   size(325, 345);
   offsetX = 0;
   offsetY = 20;
-  background(66, 179, 139);
-  optCollapsed = true;
-  drawButton();
-  board = new Board(16, 16, 40);
-  sizeSquare=20;
+  sizeSquare = 20;
+  drawGame();
 }
 
 void draw() {
@@ -32,7 +29,7 @@ void draw() {
 void mouseClicked() {
   //tests if the user clicked on the restart button on the top left
   if (mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY && mouseY <= optY+optSizeY) {
-    restart();
+    drawGame();
   }
   //tests if the game is ongoing and if the user didn't click to the left or above the board
   if (!board.gameOver && mouseY>=offsetY && mouseX>=offsetX) {
@@ -87,7 +84,7 @@ void mouseClicked() {
   area of the restart button*/
   if (gameOverShown) {
     if (mouseX >= restartX && mouseX <= restartX+restartWidth && mouseY >= restartY && mouseX <= restartY+restartHeight) {
-      restart();
+      drawGame();
     }
   }
   /*if the game is over and the game over screen isn't being shown yet
@@ -98,7 +95,7 @@ void mouseClicked() {
   }
 }
 
-//displays the restart button on the top left
+//displays the restart button at the top left
 void drawButton() {
   optX = 10;
   optY = 0;
@@ -146,9 +143,9 @@ void drawGameOver() {
   rectMode(CORNER);
 }
 
-/*draws a new board with the restart button on the top left and says the game over 
+/*draws a board with the restart button on the top left and says the game over 
 screen is not being shown*/
-void restart() {
+void drawGame() {
   background(66, 179, 139);
   optCollapsed = true;
   drawButton();
