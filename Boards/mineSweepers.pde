@@ -20,11 +20,12 @@ void setup() {
   size(325, 345);
   offsetX = 0;
   offsetY = 20;
-  board = new Board(2, 1, 1);
-  spaceClicked = false;
-  sizeSquare=20;
+  background(66, 179, 139);
   optCollapsed = true;
   drawButton();
+  board = new Board(16, 16, 40);
+  spaceClicked = false;
+  sizeSquare=20;
 }
 void draw() {
 }
@@ -77,16 +78,17 @@ void mouseClicked() {
   }
   if (gameOverShown) {
     if (mouseX >= restartX && mouseX <= restartX+restartWidth && mouseY >= restartY && mouseX <= restartY+restartHeight) {
-      background(60);
+      background(66, 179, 139);
       board = new Board(board.bWidth, board.bHeight, board.mineCount);
       spaceClicked = false;
       gameOverShown = false;
       board.gameOver = false;
+      optCollapsed = true;
+  drawButton();
     }
   }
   if (board.gameOver && !gameOverShown) {
     board.displayMines();
-    delay(1000);
     drawGameOver();
   }
 }
@@ -108,12 +110,13 @@ void drawButton() {
   noFill();
 }
 void drawGameOver() {
+  //delay(2000);
   gameOverShown = true;
-  int startX = 50;
-  int startY = 50;
   int widthB = 300;
   int heightB = 300;
-  fill(255);
+  int startX = (board.bWidth*sizeSquare-widthB)/2+offsetX;
+  int startY = (board.bHeight*sizeSquare-heightB)/2+offsetY;
+  fill(255,200);
   rect(startX, startY, widthB, heightB);
   fill(0);
   if (board.gameWon) {
@@ -123,7 +126,7 @@ void drawGameOver() {
     textAlign(CENTER);
     text("Game Lost", startX+0.5*widthB, startY+0.5*heightB);
   }
-  fill(255);
+  fill(255,200);
   rectMode(CORNER);
   restartWidth=80;
   restartHeight=30;
