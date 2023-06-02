@@ -8,11 +8,11 @@ public class Board {
   boolean gameWon;
   boolean firstSpaceClicked;
   public Board() {
-    this(16,16,40);
+    this(16, 16, 40);
   }
-  
+
   /*initializes board array based on given height and width
-  and displays the board*/
+   and displays the board*/
   public Board(int bWidth, int bHeight, int mineCount) {
     board = new Space[bHeight][bWidth];
     this.bHeight = bHeight;
@@ -26,7 +26,7 @@ public class Board {
     coveredSafe = bWidth*bHeight-mineCount;
     gameOver = false;
   }
-  
+
   //changes each Space's type from undefined to a mine or notMine
   void placeMines() {
     Space space;
@@ -47,7 +47,7 @@ public class Board {
       }
     }
   }
-  
+
   //counts how many mines the Space that matches the parameters neighbors
   void countAdjacent(int x, int y) {
     int adj = 0;
@@ -93,7 +93,7 @@ public class Board {
     }
     board[y][x].changeAdjacent(adj);
   }
-  
+
   //displays all mines that aren't flagged
   void displayMines() {
     for (int i = 0; i < board.length; i++) {
@@ -108,20 +108,113 @@ public class Board {
   Space[][] returnBoard() {
     return board;
   }
-  
+
   //demo feature: uncovers all Spaces except one notMine
-  void showMostSafe(){
+  void showMostSafe() {
     for (int i = 0; i < board.length; i++) {
       for (int j = 0; j < board[0].length; j++) {
         if (board[i][j].getType().equals("notMine") && board[i][j].covered == true && coveredSafe>1) {
           countAdjacent(j, i);
-            coveredSafe--;
+          coveredSafe--;
           board[i][j].uncover();
-        }
-        else if (board[i][j].getType().equals("mine")){
+        } else if (board[i][j].getType().equals("mine")) {
           board[i][j].changeFlag();
+        }
       }
     }
   }
-}
+  void uncoverAdjacent(int x, int y) {
+    board[y][x].uncover();
+    if (x!=0) {
+      if (board[y][x-1].covered) {
+        countAdjacent(x-1, y);
+        board[y][x-1].uncover();
+        coveredSafe--;
+        if (board[y][x-1].adjacent==0) {
+          uncoverAdjacent(x-1, y);
+        }
+      }
+      if (y!=board.length-1) {
+        if (board[y+1][x-1].covered) {
+          countAdjacent(x-1, y+1);
+          board[y+1][x-1].uncover();
+          coveredSafe--;
+          if (board[y+1][x-1].adjacent==0) {
+            uncoverAdjacent(x-1, y+1);
+          }
+        }
+      }
+      if (y!=0) {
+        if (board[y-1][x-1].covered) {
+          this.countAdjacent(x-1, y-1);
+          board[y-1][x-1].uncover();
+          coveredSafe--;
+          if (board[y-1][x-1].adjacent==0) {
+            uncoverAdjacent(x-1, y-1);
+          }
+        }
+      }
+      if (y!=board.length-1) {
+        if (board[y+1][x-1].covered) {
+          this.countAdjacent(x-1, y+1);
+          board[y+1][x-1].uncover();
+          coveredSafe--;
+          if (board[y+1][x-1].adjacent==0) {
+            uncoverAdjacent(x-1, y+1);
+          }
+        }
+      }
+    }
+    if (y!=0){
+        if (board[y-1][x].covered) {
+          this.countAdjacent(x, y-1);
+          board[y-1][x].uncover();
+          coveredSafe--;
+          if (board[y-1][x].adjacent==0) {
+            uncoverAdjacent(x, y-1);
+          }
+        }
+      }
+      if (y!=board.length-1){
+        if (board[y+1][x].covered) {
+          this.countAdjacent(x, y+1);
+          board[y+1][x].uncover();
+          coveredSafe--;
+          if (board[y+1][x].adjacent==0) {
+            uncoverAdjacent(x, y+1);
+          }
+        }
+      }
+      
+    if (x!=bWidth-1) {
+      if (board[y][x+1].covered) {
+        this.countAdjacent(x+1, y);
+        board[y][x+1].uncover();
+        coveredSafe--;
+        if (board[y][x+1].adjacent==0) {
+          uncoverAdjacent(x+1, y);
+        }
+      }
+      if (y!=board.length-1) {
+        if (board[y+1][x+1].covered) {
+          this.countAdjacent(x+1, y+1);
+          board[y+1][x+1].uncover();
+          coveredSafe--;
+          if (board[y+1][x+1].adjacent==0) {
+            uncoverAdjacent(x+1, y+1);
+          }
+        }
+      }
+      if (y!=0) {
+        if (board[y-1][x+1].covered) {
+          this.countAdjacent(x+1, y-1);
+          board[y-1][x+1].uncover();
+          coveredSafe--;
+          if (board[y-1][x+1].adjacent==0) {
+            uncoverAdjacent(x+1, y-1);
+          }
+        }
+      }
+    }
+  }
 }
