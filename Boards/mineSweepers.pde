@@ -95,8 +95,11 @@ void drawButton() {
   optY = 0;
   optSizeX = 50;
   optSizeY = 15;
+  fill(124);
   rect(optX, optY, optSizeX, optSizeY);
   fill(0);
+  textAlign(LEFT);
+  textSize(12);
   text("Restart", optX+2, optY+10);
   noFill();
 }
