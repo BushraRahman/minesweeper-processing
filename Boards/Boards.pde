@@ -101,6 +101,9 @@ public class Board {
         if (board[i][j].getType().equals("mine") && board[i][j].flag == false) {
           board[i][j].uncover();
         }
+        if (board[i][j].getType().equals("notMine") && board[i][j].flag == true) {
+          board[i][j].drawWrongFlag();
+        }
       }
     }
   }

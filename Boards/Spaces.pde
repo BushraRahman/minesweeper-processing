@@ -102,4 +102,14 @@ public class Space{
       }
     }
 }
+public void drawWrongFlag(){
+  fill(0);
+    square(x,y,size);
+    noFill();
+    rectMode(CENTER);
+        fill(255,0,0);
+        rect(x+size/2,y+size/2,size/2,size-10);
+        noFill();
+        rectMode(CORNER);
+}
 }
