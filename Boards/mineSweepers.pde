@@ -28,28 +28,6 @@ void draw() {
 }
 
 void mouseClicked() {
-<<<<<<< HEAD
-  int yCor = (mouseY+offsetY)/sizeSquare;
-  int xCor = (mouseX+offsetY)/sizeSquare;
-  System.out.println("yCor"+yCor+"????");
-  System.out.println("xCor"+xCor+"?????");
-  if (yCor < board.bHeight && xCor < board.bWidth) {
-    Space square = board.returnBoard()[yCor][xCor];
-    System.out.println(square.getType());
-    if (!spaceClicked) {
-      square.changeType("notMine");
-      board.placeMines();
-      spaceClicked = true;
-    }if (square.getUncovered()) {
-      System.out.println("it's uncovered!");
-      System.out.println("uncovered"+yCor);
-      if (square.getType().equals("notMine")) {
-        board.countAdjacent(xCor, yCor);
-        System.out.println("neighbors"+square.getAdjacent());
-        if (square.getAdjacent() == 0) {
-          board.uncoverAdjacent(xCor, yCor);
-          //make uncoveredAjacent have 2 params so that you know where you're starting from
-=======
   //tests if the user clicked on the restart button on the top left
   if (mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY && mouseY <= optY+optSizeY) {
     drawGame();
@@ -93,7 +71,6 @@ void mouseClicked() {
             board.gameOver = true;
           }
           square.uncover();
->>>>>>> daf0dbfa35986cfd7c46db18079cb85bfba32fa0
         }
       }
       //if a covered Space is right clicked, add or remove a flag and update the mine count

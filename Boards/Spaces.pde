@@ -7,10 +7,6 @@ public class Space{
   private int y;
   private int size;
   boolean unchecked;
-<<<<<<< HEAD
-=======
-  
->>>>>>> daf0dbfa35986cfd7c46db18079cb85bfba32fa0
   
   public Space(){
     this(0,0,10);
@@ -65,18 +61,11 @@ public class Space{
     drawSquare();
   }
   
-<<<<<<< HEAD
-  /*For now:
-  flag is a red rectangle
-  mine is a red circle
-=======
-
   /*displays each Space as a square
   flagged Spaces have red rectangles
   uncovered mines are black with red circles
   uncovered notMines have a number with how many mines it's neighboring 
   or is blank if it's not neighboring any mines
->>>>>>> daf0dbfa35986cfd7c46db18079cb85bfba32fa0
   */
   public void drawSquare(){
     fill(255,203,164);

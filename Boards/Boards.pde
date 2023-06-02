@@ -148,7 +148,9 @@ public class Board {
       }
     }
   }
-  void uncoverAdjacent(int x, int y) {
+  
+  
+  /*void uncoverAdjacent(int x, int y) {
     board[y][x].uncover();
     if (x!=0) {
       if (board[y][x-1].covered) {
@@ -241,5 +243,5 @@ public class Board {
         }
       }
     }
-  }
+  }*/
 }
