@@ -1,5 +1,6 @@
 double accuracy;
 int gamesPlayed;
+int gamesWon;
 int sizeSquare;
 int offsetX;
 int offsetY;
@@ -64,6 +65,7 @@ void mouseClicked() {
             if (board.coveredSafe==0) {
               board.gameOver = true;
               board.gameWon = true;
+              gamesWon++;
             }
             if (square.getAdjacent() == 0) {
               board.uncoverAdjacent(xCor,yCor);
@@ -121,6 +123,8 @@ void drawButton() {
 
 //displays the game over screen
 void drawGameOver() {
+  time = millis();
+  gamesPlayed++;
   gameOverShown = true;
   //sets size of the screen and draw its outline
   int widthB = 300;
@@ -150,6 +154,9 @@ void drawGameOver() {
   text("RESTART", startX+0.5*widthB, startY+0.8*heightB);
   noFill();
   rectMode(CORNER);
+  //displays the game statistics
+  text("Games played: " + gamesPlayed, startX+0.5*widthB, startY+0*heightB);
+  text("Games won: " + gamesWon, startX+0.5*widthB, startY+0.8*heightB);
 }
 
 /*draws a board with the restart button on the top left and says the game over 
