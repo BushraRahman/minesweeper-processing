@@ -14,6 +14,7 @@ float restartY;
 int restartWidth;
 int restartHeight;
 int unflaggedMines;
+int time;
 Board board;
 
 void setup() {
@@ -25,6 +26,7 @@ void setup() {
 }
 
 void draw() {
+  displayTime();
 }
 
 void mouseClicked() {
@@ -158,8 +160,10 @@ void drawGame() {
   drawButton();
   board = new Board(16, 16, 40);
   gameOverShown = false;
-  unflaggedMines = 40;
+  unflaggedMines = 2;
   displayMineCount();
+  time = millis();
+  displayTime();
 }
 
 //demo feature to show winning the game
@@ -182,6 +186,23 @@ void displayMineCount(){
   textSize(13);
   fill(0);
   text("Mines: " + unflaggedMines,optX+optSizeX+10,optY+10);
+  noFill();
+}
+
+void displayTime(){
+  noStroke();
+  fill(66, 179, 139);
+  rectMode(CORNER);
+  rect(optX+optSizeX+100,optY,30,10);
+  stroke(0);
+  textAlign(LEFT);
+  textSize(13);
+  fill(0);
+  String sec = ((millis()-time)%60000/1000)+"";
+  if (Integer.parseInt(sec) < 10){
+    sec = 0 + sec;
+  }
+  text((millis()-time)%(60000*60)/60000 + ":" + (millis()-time)%60000/1000,optX+optSizeX+100,optY+10);
   noFill();
 }
   
