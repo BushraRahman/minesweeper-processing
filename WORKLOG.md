@@ -74,3 +74,5 @@
 ### June 1/2
 - Finished working uncovering adjacent spaces feature
 
+### June 6
+- Fixed corner issue on uncoverAdjacent
