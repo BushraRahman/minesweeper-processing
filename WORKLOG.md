@@ -76,3 +76,4 @@
 
 ### June 6
 - Fixed corner issue on uncoverAdjacent
+- Beginning work on custom game option
