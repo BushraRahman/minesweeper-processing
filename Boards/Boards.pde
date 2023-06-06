@@ -64,12 +64,10 @@ public class Board {
       if (y > 0 && selected.getType().equals("notMine")) uncoverAdjacent(x,y - 1);
       if (x < bWidth - 1 && selected.getType().equals("notMine")) uncoverAdjacent(x + 1,y);
       if (y < bHeight - 1 && selected.getType().equals("notMine")) uncoverAdjacent(x,y + 1);
-      /*selected.uncover();
-      selected.drawSquare();
-      if (x > 0) uncoverAdjacent(x - 1,y);
-      if (y > 0) uncoverAdjacent(x,y - 1);
-      if (x < bWidth - 1) uncoverAdjacent(x + 1,y);
-      if (y < bHeight - 1) uncoverAdjacent(x,y + 1);*/
+      if (x > 0  && y > 0 && selected.getType().equals("notMine")) uncoverAdjacent(x - 1,y - 1);
+      if (x > 0 && y < bHeight - 1 && selected.getType().equals("notMine")) uncoverAdjacent(x - 1,y + 1);
+      if (x < bWidth - 1 && y > 0 && selected.getType().equals("notMine")) uncoverAdjacent(x + 1,y - 1);
+      if (x < bWidth - 1 && y < bHeight - 1 && selected.getType().equals("notMine")) uncoverAdjacent(x + 1,y + 1);
     }
   }
 
