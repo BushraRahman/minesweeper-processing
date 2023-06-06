@@ -202,7 +202,7 @@ void displayTime(){
   if (Integer.parseInt(sec) < 10){
     sec = 0 + sec;
   }
-  text((millis()-time)%(60000*60)/60000 + ":" + (millis()-time)%60000/1000,optX+optSizeX+100,optY+10);
+  text((millis()-time)%(60000*60)/60000 + ":" + sec,optX+optSizeX+100,optY+10);
   noFill();
 }
   
