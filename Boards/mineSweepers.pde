@@ -13,6 +13,10 @@ float restartX;
 float restartY;
 int restartWidth;
 int restartHeight;
+float customBoardX;
+float customBoardY;
+int customBoardWidth;
+int customBoardHeight;
 int unflaggedMines;
 Board board;
 
@@ -93,6 +97,9 @@ void mouseClicked() {
     if (mouseX >= restartX && mouseX <= restartX+restartWidth && mouseY >= restartY && mouseX <= restartY+restartHeight) {
       drawGame();
     }
+    if (mouseX >= customBoardX && mouseX <= customBoardX+customBoardWidth && mouseY >= customBoardY && mouseX <= customBoardY+customBoardHeight) {
+      drawGame();
+    }
   }
   /*if the game is over and the game over screen isn't being shown yet
   display all mines and display the game over screen*/
@@ -134,7 +141,7 @@ void drawGameOver() {
     text("Game Won", startX+0.5*widthB, startY+0.5*heightB);
   } else {
     textAlign(CENTER);
-    text("Game Lost", startX+0.5*widthB, startY+0.5*heightB);
+    text("Game Lost", startX+0.5*widthB, startY+0.25*heightB);
   }
   //displays the restart button in the screen
   fill(255, 200);
@@ -142,10 +149,23 @@ void drawGameOver() {
   restartWidth=80;
   restartHeight=30;
   restartX=startX+0.5*widthB-0.5*restartWidth;
-  restartY=startY+0.8*heightB-0.5*restartHeight;
+  restartY=startY+0.475*heightB-0.5*restartHeight;
   rect(restartX, restartY, restartWidth, restartHeight);
   fill(0);
-  text("RESTART", startX+0.5*widthB, startY+0.8*heightB);
+  text("RESTART", startX+0.5*widthB, startY+0.5*heightB);
+  noFill();
+  rectMode(CORNER);
+  
+  //displays the custom game button in the screen
+  fill(255, 200);
+  rectMode(CORNER);
+  customBoardWidth=180;
+  customBoardHeight=30;
+  customBoardX=startX+0.5*widthB-0.5*customBoardWidth;
+  customBoardY=startY+0.725*heightB-0.5*customBoardHeight;
+  rect(customBoardX, customBoardY, customBoardWidth, customBoardHeight);
+  fill(0);
+  text("NEW CUSTOM GAME", startX+0.5*widthB, startY+0.75*heightB);
   noFill();
   rectMode(CORNER);
 }
