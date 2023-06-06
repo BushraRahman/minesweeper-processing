@@ -1,5 +1,6 @@
 double accuracy;
 int gamesPlayed;
+int gamesWon;
 int sizeSquare;
 int offsetX;
 int offsetY;
@@ -18,6 +19,7 @@ float customBoardY;
 int customBoardWidth;
 int customBoardHeight;
 int unflaggedMines;
+int time;
 Board board;
 
 void setup() {
@@ -29,6 +31,7 @@ void setup() {
 }
 
 void draw() {
+  displayTime();
 }
 
 void mouseClicked() {
@@ -66,6 +69,7 @@ void mouseClicked() {
             if (board.coveredSafe==0) {
               board.gameOver = true;
               board.gameWon = true;
+              gamesWon++;
             }
             if (square.getAdjacent() == 0) {
               board.uncoverAdjacent(xCor,yCor);
@@ -126,6 +130,8 @@ void drawButton() {
 
 //displays the game over screen
 void drawGameOver() {
+  time = millis();
+  gamesPlayed++;
   gameOverShown = true;
   //sets size of the screen and draw its outline
   int widthB = 300;
@@ -168,6 +174,9 @@ void drawGameOver() {
   text("NEW CUSTOM GAME", startX+0.5*widthB, startY+0.75*heightB);
   noFill();
   rectMode(CORNER);
+  //displays the game statistics
+  text("Games played: " + gamesPlayed, startX+0.5*widthB, startY+0*heightB);
+  text("Games won: " + gamesWon, startX+0.5*widthB, startY+0.8*heightB);
 }
 
 /*draws a board with the restart button on the top left and says the game over 
@@ -178,8 +187,10 @@ void drawGame() {
   drawButton();
   board = new Board(16, 16, 40);
   gameOverShown = false;
-  unflaggedMines = 40;
+  unflaggedMines = 2;
   displayMineCount();
+  time = millis();
+  displayTime();
 }
 
 //demo feature to show winning the game
@@ -202,6 +213,23 @@ void displayMineCount(){
   textSize(13);
   fill(0);
   text("Mines: " + unflaggedMines,optX+optSizeX+10,optY+10);
+  noFill();
+}
+
+void displayTime(){
+  noStroke();
+  fill(66, 179, 139);
+  rectMode(CORNER);
+  rect(optX+optSizeX+100,optY,30,10);
+  stroke(0);
+  textAlign(LEFT);
+  textSize(13);
+  fill(0);
+  String sec = ((millis()-time)%60000/1000)+"";
+  if (Integer.parseInt(sec) < 10){
+    sec = 0 + sec;
+  }
+  text((millis()-time)%(60000*60)/60000 + ":" + sec,optX+optSizeX+100,optY+10);
   noFill();
 }
   

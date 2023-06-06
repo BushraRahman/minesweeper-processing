@@ -40,11 +40,16 @@
 -Began working on a game over screen with a restart button
 
 ### June 1
--Made Game Over screen is centered on board, transparent
+-Made Game Over screen centered on board, transparent
 -Restart buttons now work
 -Fixed error where clicking above the board modified the board
 -Added demo feature that reveals most non-mines
 -Cleaned up code: added comments to improve readability, moved and renamed some variables
+-Made and added uncoverAdjacent
+
+### June 5
+-Added feature that displays the time since the game has started
+-Began working on displaying the game statistics (games played, games won, percentage) on the game over screen
 
 ## Que, Danielle
 
