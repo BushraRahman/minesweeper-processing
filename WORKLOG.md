@@ -82,3 +82,6 @@
 ### June 6
 - Fixed corner issue on uncoverAdjacent
 - Beginning work on custom game option
+
+### June 7
+- Created custom game screen, shows dimensions
