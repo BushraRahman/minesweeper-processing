@@ -9,13 +9,17 @@ int optX;
 int optY;
 int optSizeX;
 int optSizeY;
-boolean gameOverShown;
 float restartX;
 float restartY;
+boolean gameOverShown;
 int restartWidth;
 int restartHeight;
 int unflaggedMines;
 int time;
+int restartOptX;
+int restartOptY;
+int restartOptSizeX;
+int restartOptSizeY;
 Board board;
 
 void setup() {
@@ -23,7 +27,7 @@ void setup() {
   offsetX = 0;
   offsetY = 20;
   sizeSquare = 20;
-  drawGame();
+  drawGame(16,16,40);
 }
 
 void draw() {
@@ -33,7 +37,7 @@ void draw() {
 void mouseClicked() {
   //tests if the user clicked on the restart button on the top left
   if (mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY && mouseY <= optY+optSizeY) {
-    drawGame();
+    drawButtons();
   }
   //tests if the game is ongoing and if the user didn't click to the left or above the board
   if (!board.gameOver && mouseY>=offsetY && mouseX>=offsetX) {
@@ -107,19 +111,37 @@ void mouseClicked() {
 }
 
 //displays the restart button at the top left
-void drawButton() {
+void drawButtons() {
+  if(optCollapsed){
+    optCollapsed = false;
+  }
+  else{
+    optCollapsed = true;
+  }
   optX = 10;
   optY = 0;
   optSizeX = 50;
   optSizeY = 15;
+  restartOptY = optY+optSizeY;
+  restartOptSizeX = 50;
+  restartOptSizeY = 15;
+  drawButton(optX,optY,optSizeX,optSizeY,"OPTIONS");
+  noFill();
+  if (!optCollapsed){
+    drawButton(optX,restartOptY,optSizeX,restartOptSizeY,"RESTART");
+}
+}
+
+void drawButton(int x, int y, int widthB, int heightB, String text) {
   fill(124);
-  rect(optX, optY, optSizeX, optSizeY);
+  rect(x, y, widthB, heightB);
   fill(0);
   textAlign(LEFT);
   textSize(12);
-  text("RESTART", optX+2, optY+10);
+  text(text, x+2, y+10);
   noFill();
 }
+
 
 //displays the game over screen
 void drawGameOver() {
@@ -155,8 +177,8 @@ void drawGameOver() {
   noFill();
   rectMode(CORNER);
   //displays the game statistics
-  text("Games played: " + gamesPlayed, startX+0.5*widthB, startY+0*heightB);
-  text("Games won: " + gamesWon, startX+0.5*widthB, startY+0.8*heightB);
+  text("Games played: " + gamesPlayed, startX+0.5*widthB, startY+0.3*heightB);
+  text("Games won: " + gamesWon, startX+0.5*widthB, startY+0.6*heightB);
 }
 
 /*draws a board with the restart button on the top left and says the game over 
@@ -164,15 +186,26 @@ screen is not being shown*/
 void drawGame() {
   background(66, 179, 139);
   optCollapsed = true;
-  drawButton();
-  board = new Board(16, 16, 40);
+  drawButtons();
+  board = new Board(5, 5, 3);
   gameOverShown = false;
-  unflaggedMines = 2;
+  unflaggedMines = 3;
   displayMineCount();
   time = millis();
   displayTime();
 }
 
+void drawGame(int bWidth, int bHeight, int mines) {
+  background(66, 179, 139);
+  optCollapsed = true;
+  drawButtons();
+  board = new Board(bWidth, bHeight, mines);
+  gameOverShown = false;
+  unflaggedMines =mines;
+  displayMineCount();
+  time = millis();
+  displayTime();
+}
 //demo feature to show winning the game
 void keyPressed() {
   if (keyCode == 's' || keyCode == 'S') {
