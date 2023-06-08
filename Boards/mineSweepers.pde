@@ -14,7 +14,6 @@ float restartY;
 boolean gameOverShown;
 int restartWidth;
 int restartHeight;
-int unflaggedMines;
 int time;
 int restartOptX;
 int restartOptY;
@@ -86,9 +85,9 @@ void mouseClicked() {
         if (square.getCovered()) {
           square.changeFlag();
           if(square.flag){
-            unflaggedMines--;
+            board.unflaggedMines--;
         }else{
-          unflaggedMines++;
+          board.unflaggedMines++;
       }
       displayMineCount();
         }
@@ -99,7 +98,7 @@ void mouseClicked() {
   area of the restart button*/
   if (gameOverShown) {
     if (mouseX >= restartX && mouseX <= restartX+restartWidth && mouseY >= restartY && mouseX <= restartY+restartHeight) {
-      drawGame();
+      drawGame(16,16,40);
     }
   }
   /*if the game is over and the game over screen isn't being shown yet
@@ -183,34 +182,22 @@ void drawGameOver() {
 
 /*draws a board with the restart button on the top left and says the game over 
 screen is not being shown*/
-void drawGame() {
-  background(66, 179, 139);
-  optCollapsed = true;
-  drawButtons();
-  board = new Board(5, 5, 3);
-  gameOverShown = false;
-  unflaggedMines = 3;
-  displayMineCount();
-  time = millis();
-  displayTime();
-}
-
 void drawGame(int bWidth, int bHeight, int mines) {
   background(66, 179, 139);
   optCollapsed = true;
   drawButtons();
   board = new Board(bWidth, bHeight, mines);
   gameOverShown = false;
-  unflaggedMines =mines;
   displayMineCount();
   time = millis();
   displayTime();
 }
+
 //demo feature to show winning the game
 void keyPressed() {
   if (keyCode == 's' || keyCode == 'S') {
     board.showMostSafe();
-    unflaggedMines = 0;
+    board.unflaggedMines = 0;
     displayMineCount();
   }
 }
@@ -225,7 +212,7 @@ void displayMineCount(){
   textAlign(LEFT);
   textSize(13);
   fill(0);
-  text("Mines: " + unflaggedMines,optX+optSizeX+10,optY+10);
+  text("Mines: " + board.unflaggedMines,optX+optSizeX+10,optY+10);
   noFill();
 }
 

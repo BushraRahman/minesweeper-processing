@@ -7,6 +7,7 @@ public class Board {
   int coveredSafe;
   boolean gameWon;
   boolean firstSpaceClicked;
+  int unflaggedMines;
   public Board() {
     this(16, 16, 40);
   }
@@ -22,7 +23,7 @@ public class Board {
         board[i][j] = new Space(j*20, i*20, 20);
       }
     }
-    this.mineCount = mineCount;
+    this.mineCount = unflaggedMines = mineCount;
     coveredSafe = bWidth*bHeight-mineCount;
     gameOver = false;
   }
