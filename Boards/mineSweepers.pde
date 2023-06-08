@@ -19,6 +19,7 @@ int restartOptX;
 int restartOptY;
 int restartOptSizeX;
 int restartOptSizeY;
+//int ms;
 Board board;
 
 void setup() {
@@ -37,7 +38,9 @@ void setup() {
 }
 
 void draw() {
+  if(!gameOverShown){
   displayTime();
+}
 }
 
 void mouseClicked() {
@@ -224,7 +227,7 @@ void displayTime(){
   textAlign(LEFT);
   textSize(13);
   fill(0);
-  String sec = ((millis()-time)%60000/1000)+"";
+    String sec = ((millis()-time)%60000/1000)+"";
   if (Integer.parseInt(sec) < 10){
     sec = 0 + sec;
   }
