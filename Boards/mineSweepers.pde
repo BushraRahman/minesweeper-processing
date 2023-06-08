@@ -23,6 +23,7 @@ int customBoardWidth;
 int customBoardHeight;
 int customBoardMines;
 boolean clicked;
+boolean customBoardShown;
 //int ms;
 Board board;
 
@@ -133,6 +134,7 @@ void drawButtons() {
   noFill();
   if (!optCollapsed) {
     drawButton(optX, restartOptY, optSizeX, restartOptSizeY, "RESTART");
+    drawButton(optX, optY+optSizeY*2, optSizeX, optSizeY, "Custom");
   }
 }
 
@@ -198,8 +200,6 @@ void drawGame(int bWidth, int bHeight, int mines) {
   displayTime();
 }
 
-void reDraw() {
-}
 
 //demo feature to show winning the game
 void keyPressed() {
@@ -207,9 +207,6 @@ void keyPressed() {
     board.showMostSafe();
     board.unflaggedMines = 0;
     displayMineCount();
-  }
-  if (keyCode == 'h' || keyCode == 'H') {
-    board.drawBoard();
   }
 }
 
@@ -258,10 +255,21 @@ void optionsInteractions() {
     if (mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY+optSizeY && mouseY <= optY+2*optSizeY) {
       drawGame(customBoardWidth, customBoardHeight, customBoardMines);
       clicked = true;
-    } else {
+    }else if ( mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY+2*optSizeY && mouseY <= optY+3*optSizeY){
+      drawCustomBoardIntroScreen();
+      clicked = true;
+    }
+    else {
       optCollapsed = true;
       drawButtons();
       board.drawBoard();
     }
   }
+}
+
+void drawCustomBoardIntroScreen(){
+  //my version is for testing purposes. delete most later
+  fill(255);
+  rect(10, 10, 30, 30);
+  fill(0);
 }
