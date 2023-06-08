@@ -26,6 +26,13 @@ void setup() {
   offsetX = 0;
   offsetY = 20;
   sizeSquare = 20;
+  optX = 0;
+  optY = 0;
+  optSizeX = 50;
+  optSizeY = 15;
+  restartOptY = optY+optSizeY;
+  restartOptSizeX = 50;
+  restartOptSizeY = 15;
   drawGame(16,16,40);
 }
 
@@ -35,9 +42,7 @@ void draw() {
 
 void mouseClicked() {
   //tests if the user clicked on the restart button on the top left
-  if (mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY && mouseY <= optY+optSizeY) {
-    drawButtons();
-  }
+  optionsInteractions();
   //tests if the game is ongoing and if the user didn't click to the left or above the board
   if (!board.gameOver && mouseY>=offsetY && mouseX>=offsetX) {
     int yCor = (mouseY-offsetY)/sizeSquare;
@@ -111,20 +116,8 @@ void mouseClicked() {
 
 //displays the restart button at the top left
 void drawButtons() {
-  if(optCollapsed){
-    optCollapsed = false;
-  }
-  else{
-    optCollapsed = true;
-  }
-  optX = 10;
-  optY = 0;
-  optSizeX = 50;
-  optSizeY = 15;
-  restartOptY = optY+optSizeY;
-  restartOptSizeX = 50;
-  restartOptSizeY = 15;
   drawButton(optX,optY,optSizeX,optSizeY,"OPTIONS");
+  System.out.println(optSizeX);
   noFill();
   if (!optCollapsed){
     drawButton(optX,restartOptY,optSizeX,restartOptSizeY,"RESTART");
@@ -193,12 +186,18 @@ void drawGame(int bWidth, int bHeight, int mines) {
   displayTime();
 }
 
+void reDraw(){
+}
+
 //demo feature to show winning the game
 void keyPressed() {
   if (keyCode == 's' || keyCode == 'S') {
     board.showMostSafe();
     board.unflaggedMines = 0;
     displayMineCount();
+  }
+  if (keyCode == 'h' || keyCode == 'H') {
+    board.drawBoard();
   }
 }
 
@@ -231,5 +230,18 @@ void displayTime(){
   }
   text((millis()-time)%(60000*60)/60000 + ":" + sec,optX+optSizeX+100,optY+10);
   noFill();
+}
+
+void optionsInteractions(){
+  if (mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY && mouseY <= optY+optSizeY) {
+    if(optCollapsed){
+    optCollapsed = false;
+  }
+  else{
+    optCollapsed = true;
+  }
+    drawButtons();
+  }
+  
 }
   
