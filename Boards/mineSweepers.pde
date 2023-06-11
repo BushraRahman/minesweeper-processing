@@ -150,7 +150,6 @@ void drawButton(int x, int y, int widthB, int heightB, String text) {
 
 //displays the game over screen
 void drawGameOver() {
-  time = millis();
   gamesPlayed++;
   gameOverShown = true;
   //sets size of the screen and draw its outline
@@ -196,7 +195,7 @@ void drawGame(int bWidth, int bHeight, int mines) {
   gameOverShown = false;
   displayMineCount();
   time = millis();
-  displayTime();
+  //displayTime();
 }
 
 
@@ -208,7 +207,7 @@ void keyPressed() {
     displayMineCount();
   }
   if (keyCode == 'h' || keyCode == 'H') {
-    redrawBoard();
+    //redrawBoard();
   }
 }
 
@@ -227,9 +226,8 @@ void displayMineCount() {
 }
 
 void displayTime() {
-  time = millis();
   System.out.println("millis: " + millis()/1000);
-  System.out.println(time/1000);
+  //System.out.println(time2/1000);
   noStroke();
   fill(66, 179, 139);
   rectMode(CORNER);
@@ -238,12 +236,11 @@ void displayTime() {
   textAlign(LEFT);
   textSize(13);
   fill(0);
-  time+=millis()-time;
-  String sec = time%60000/1000+"";
+  String sec = ((millis()-time)%60000/1000)+"";
   if (Integer.parseInt(sec) < 10) {
     sec = 0 + sec;
   }
-  text(time%(60000*60)/60000 + ":" + sec, optX+optSizeX+100, optY+10);
+  text((millis()-time)%(60000*60)/60000 + ":" + sec, optX+optSizeX+100, optY+10);
   noFill();
 }
 
@@ -263,8 +260,8 @@ void optionsInteractions() {
       noFill();
       rectMode(CORNER);
       board.drawBoard();
-      drawCustomBoardIntroScreen();
       customBoardShown = true;
+      drawCustomBoardIntroScreen();
     }
   }
   //if you click on the Options button, collapse/uncollapse it
@@ -292,7 +289,7 @@ void drawCustomBoardIntroScreen(){
   rect(10, 10, 30, 30);
   fill(0);
 }
-
+/*
 void redrawBoard(){
   background(66, 179, 139);
   drawButtons();
@@ -301,4 +298,12 @@ void redrawBoard(){
   board.drawBoard();
   customBoardShown = false;
   clicked = false;
+  time1 = millis();
+  time2 = actTime;
 }
+*/
+/*
+ok plan:
+two time variables
+every time game resumes, reset time2 variable. 
+add old time to millis-time2*/
