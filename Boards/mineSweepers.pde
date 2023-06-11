@@ -41,13 +41,13 @@ void setup() {
   restartOptSizeY = 15;
   customBoardWidth = 16;
   customBoardHeight = 16;
-  customBoardMines = 16;
+  customBoardMines = 40;
   clicked = false;
   drawGame(16, 16, 40);
 }
 
 void draw() {
-  if (!gameOverShown) {
+  if (!gameOverShown && !customBoardShown) {
     displayTime();
   }
 }
@@ -57,7 +57,7 @@ void mouseClicked() {
   //tests if the user clicked on the restart button on the top left
   optionsInteractions();
   //tests if the game is ongoing and if the user didn't click to the left or above the board
-  if (!board.gameOver && mouseY>=offsetY && mouseX>=offsetX && !clicked) {
+  if (!board.gameOver && mouseY>=offsetY && mouseX>=offsetX && !clicked && !customBoardShown) {
     int yCor = (mouseY-offsetY)/sizeSquare;
     int xCor = (mouseX-offsetX)/sizeSquare;
     //tests if the user clicked on the board
@@ -207,6 +207,9 @@ void keyPressed() {
     board.unflaggedMines = 0;
     displayMineCount();
   }
+  if (keyCode == 'h' || keyCode == 'H') {
+    redrawBoard();
+  }
 }
 
 //shows number of mines minus the number of flags
@@ -224,6 +227,9 @@ void displayMineCount() {
 }
 
 void displayTime() {
+  time = millis();
+  System.out.println("millis: " + millis()/1000);
+  System.out.println(time/1000);
   noStroke();
   fill(66, 179, 139);
   rectMode(CORNER);
@@ -232,11 +238,12 @@ void displayTime() {
   textAlign(LEFT);
   textSize(13);
   fill(0);
-  String sec = ((millis()-time)%60000/1000)+"";
+  time+=millis()-time;
+  String sec = time%60000/1000+"";
   if (Integer.parseInt(sec) < 10) {
     sec = 0 + sec;
   }
-  text((millis()-time)%(60000*60)/60000 + ":" + sec, optX+optSizeX+100, optY+10);
+  text(time%(60000*60)/60000 + ":" + sec, optX+optSizeX+100, optY+10);
   noFill();
 }
 
@@ -246,13 +253,18 @@ void optionsInteractions() {
       drawGame(customBoardWidth, customBoardHeight, customBoardMines);
       clicked = true;
     }else if ( mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY+2*optSizeY && mouseY <= optY+3*optSizeY){
-      drawCustomBoardIntroScreen();
-      clicked = true;
-    }
-    else {
       optCollapsed = true;
-      drawButtons();
+      clicked = true;
+      rectMode(CORNERS);
+      fill(66, 179, 139);
+      noStroke();
+      rect(optX,optY+optSizeY+1,optX+optSizeX+1,offsetY);
+      stroke(0);
+      noFill();
+      rectMode(CORNER);
       board.drawBoard();
+      drawCustomBoardIntroScreen();
+      customBoardShown = true;
     }
   }
   //if you click on the Options button, collapse/uncollapse it
@@ -279,4 +291,14 @@ void drawCustomBoardIntroScreen(){
   fill(255);
   rect(10, 10, 30, 30);
   fill(0);
+}
+
+void redrawBoard(){
+  background(66, 179, 139);
+  drawButtons();
+  displayMineCount();
+  displayTime();
+  board.drawBoard();
+  customBoardShown = false;
+  clicked = false;
 }
