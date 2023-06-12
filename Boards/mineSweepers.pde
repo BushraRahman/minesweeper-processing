@@ -51,7 +51,7 @@ void setup() {
 }
 
 void draw() {
-  if (!gameOverShown && !customBoardShown) {
+  if (!gameOverShown && !customBoardScreenShown) {
     displayTime();
   }
 }
@@ -59,11 +59,11 @@ void draw() {
 void mouseClicked() {
   clicked = false;
   //tests if the user clicked on the restart button on the top left
-  if(!customBoardShown){
+  if(!customBoardScreenShown){
   optionsInteractions();
   }
   //tests if the game is ongoing and if the user didn't click to the left or above the board
-  if (!board.gameOver && mouseY>=offsetY && mouseX>=offsetX && !clicked && !customBoardShown) {
+  if (!board.gameOver && mouseY>=offsetY && mouseX>=offsetX && !clicked && !customBoardScreenShown) {
     int yCor = (mouseY-offsetY)/sizeSquare;
     int xCor = (mouseX-offsetX)/sizeSquare;
     //tests if the user clicked on the board
@@ -256,6 +256,8 @@ void drawGameOver() {
 /*displays the pre-custom game screen asking for the measurements and number 
 of mines for the custom board*/
 void drawCustomBoardIntroScreen(){
+  textSize(14);
+  textAlign(CENTER);
   background(66, 179, 139);
   int widthB = 300;
   int heightB = 300;
@@ -272,7 +274,7 @@ void drawCustomBoardIntroScreen(){
   restartY=startY+0.25*heightB-0.5*restartHeight;
   rect(restartX, restartY, 70, 30);
   fill(0);
-  text("Width: " + customBoardWidth, startX+0.43*widthB, startY+0.27*heightB);
+  text("Width: " + customBoardWidth, startX+0.5*widthB, startY+0.27*heightB);
   noFill();
   rectMode(CORNER);
   
@@ -289,7 +291,7 @@ void drawCustomBoardIntroScreen(){
   restartY=startY+0.50*heightB-0.5*restartHeight;
   rect(restartX, restartY, 70, 30);
   fill(0);
-  text("Height: " + customBoardHeight, startX+0.43*widthB, startY+0.52*heightB);
+  text("Height: " + customBoardHeight, startX+0.5*widthB, startY+0.52*heightB);
   noFill();
   rectMode(CORNER);
   
@@ -305,7 +307,7 @@ void drawCustomBoardIntroScreen(){
   restartY=startY+0.75*heightB-0.5*restartHeight;
   rect(restartX, restartY, 70, 30);
   fill(0);
-  text("Mines: " + customBoardMines, startX+0.43*widthB, startY+0.77*heightB);
+  text("Mines: " + customBoardMines, startX+0.5*widthB, startY+0.77*heightB);
   noFill();
   rectMode(CORNER);
   
@@ -322,10 +324,11 @@ void drawCustomBoardIntroScreen(){
   text("Create Game", startX + 220, startY + 285);
   noFill();
   rectMode(CORNER);
-
+/*
   text("Games played: " + gamesPlayed, startX+0.5*widthB, startY+0.05*heightB);
   text("Games won: " + gamesWon, startX+0.5*widthB, startY+0.1*heightB);
   text("Win rate: " + Math.round(gamesWon/gamesPlayed*10000)/100 + "%", startX+0.5*widthB, startY+0.15*heightB);
+  */
 }
 
 /*draws a board with the restart button on the top left and says the game over
@@ -403,7 +406,7 @@ void optionsInteractions() {
       noFill();
       rectMode(CORNER);
       board.drawBoard();
-      customBoardShown = true;
+      customBoardScreenShown = true;
       drawCustomBoardIntroScreen();
     }
   }
