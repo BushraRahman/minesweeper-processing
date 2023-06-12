@@ -164,11 +164,11 @@ void mouseClicked() {
     float restartXM = startX+0.5*widthB-0.5*restartWidth;
     float restartYM = startY+0.75*heightB-0.5*restartHeight;
     if (mouseX <= restartXM - 5 && mouseX >= restartXM - 35 && mouseY >= restartYM && mouseY <= restartYM + 30){
-      if (customBoardMines > 25) customBoardMines -= 1;
+      if (customBoardMines > 10) customBoardMines -= 1;
       drawCustomBoardIntroScreen();
     }
     if (mouseX >= restartXM + 70 - 5 && mouseX <= restartXM + 70 + 35 && mouseY >= restartYM && mouseY <= restartYM + 30){
-      if (customBoardMines < 50) customBoardMines += 1;
+      if (customBoardMines < (customBoardHeight-1)*(customBoardWidth-1)) customBoardMines += 1;
       drawCustomBoardIntroScreen();
     }
     if (mouseX >= startX + 215 && mouseX <= startX + 215 + 80 && mouseY >= startY + 265 && mouseY <= startY + 265 + 30){
@@ -212,8 +212,8 @@ void drawGameOver() {
   //sets size of the screen and draw its outline
   int widthB = 300;
   int heightB = 300;
-  int startX = (board.bWidth*sizeSquare-widthB)/2+offsetX;
-  int startY = (board.bHeight*sizeSquare-heightB)/2+offsetY;
+  int startX = Math.max((board.bWidth*sizeSquare-widthB)/2+offsetX,0);
+  int startY = Math.max((board.bHeight*sizeSquare-heightB)/2+offsetY,0);
   fill(255, 200);
   rect(startX, startY, widthB, heightB);
   fill(0);
