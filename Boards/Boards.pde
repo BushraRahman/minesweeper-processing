@@ -7,6 +7,7 @@ public class Board {
   int coveredSafe;
   boolean gameWon;
   boolean firstSpaceClicked;
+  int unflaggedMines;
   public Board() {
     this(16, 16, 40);
   }
@@ -22,7 +23,7 @@ public class Board {
         board[i][j] = new Space(j*20, i*20, 20);
       }
     }
-    this.mineCount = mineCount;
+    this.mineCount = unflaggedMines = mineCount;
     coveredSafe = bWidth*bHeight-mineCount;
     gameOver = false;
   }
@@ -146,6 +147,14 @@ public class Board {
         } else if (board[i][j].getType().equals("mine")) {
           board[i][j].changeFlag();
         }
+      }
+    }
+  }
+  
+   void drawBoard(){
+    for (int i = 0; i < board.length; i++) {
+      for (int j = 0; j < board[0].length; j++) {
+        board[i][j].drawSquare();
       }
     }
   }

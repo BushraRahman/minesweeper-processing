@@ -51,6 +51,15 @@
 -Added feature that displays the time since the game has started
 -Began working on displaying the game statistics (games played, games won, percentage) on the game over screen
 
+### June 7
+-Started adding collapsable buttons that can be opened by clicking on the options button
+-Made the timer stop when the game is over
+-Changed the appearance of wrongly flagged Spaces
+
+### June 11
+-Finished working on the buttons
+-Added game statistics to game over screen
+
 ## Que, Danielle
 
 ### May 22

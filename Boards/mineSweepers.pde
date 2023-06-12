@@ -9,9 +9,9 @@ int optX;
 int optY;
 int optSizeX;
 int optSizeY;
-boolean gameOverShown;
 float restartX;
 float restartY;
+boolean gameOverShown;
 int restartWidth;
 int restartHeight;
 float customBoardX;
@@ -22,6 +22,13 @@ int unflaggedMines;
 int time;
 int customBoardMines;
 boolean customBoardScreenShown;
+int restartOptX;
+int restartOptY;
+int restartOptSizeX;
+int restartOptSizeY;
+boolean clicked;
+boolean customBoardShown;
+//int ms;
 Board board;
 
 void setup() {
@@ -29,20 +36,34 @@ void setup() {
   offsetX = 0;
   offsetY = 20;
   sizeSquare = 20;
-  drawGame();
+  optX = 0;
+  optY = 0;
+  optSizeX = 50;
+  optSizeY = 15;
+  restartOptY = optY+optSizeY;
+  restartOptSizeX = 50;
+  restartOptSizeY = 15;
+  customBoardWidth = 16;
+  customBoardHeight = 16;
+  customBoardMines = 40;
+  clicked = false;
+  drawGame(16, 16, 40);
 }
 
 void draw() {
-  displayTime();
+  if (!gameOverShown && !customBoardShown) {
+    displayTime();
+  }
 }
 
 void mouseClicked() {
+  clicked = false;
   //tests if the user clicked on the restart button on the top left
-  if (mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY && mouseY <= optY+optSizeY) {
-    drawGame();
+  if(!customBoardShown){
+  optionsInteractions();
   }
   //tests if the game is ongoing and if the user didn't click to the left or above the board
-  if (!board.gameOver && mouseY>=offsetY && mouseX>=offsetX) {
+  if (!board.gameOver && mouseY>=offsetY && mouseX>=offsetX && !clicked && !customBoardShown) {
     int yCor = (mouseY-offsetY)/sizeSquare;
     int xCor = (mouseX-offsetX)/sizeSquare;
     //tests if the user clicked on the board
@@ -56,15 +77,15 @@ void mouseClicked() {
           board.firstSpaceClicked = true;
         }
         /* tests if the user clicked on a covered Space
-        if the Space is already uncovered, clicking does not modify the board
-        if the Space is covered, it becomes uncovered
-        */
+         if the Space is already uncovered, clicking does not modify the board
+         if the Space is covered, it becomes uncovered
+         */
         if (square.getCovered()) {
           /*if the Space isn't a mine, count how many mines it's neighboring.
-          if it's neighboring 0 mines, uncover Spaces in all directions until a
-          mine-adjacent Space is reached.
-          reduce the board's count of covered non-mines
-          and the game is over is all non-mines are uncovered*/
+           if it's neighboring 0 mines, uncover Spaces in all directions until a
+           mine-adjacent Space is reached.
+           reduce the board's count of covered non-mines
+           and the game is over is all non-mines are uncovered*/
           if (square.getType().equals("notMine")) {
             board.countAdjacent(xCor, yCor);
             board.coveredSafe--;
@@ -74,7 +95,7 @@ void mouseClicked() {
               gamesWon++;
             }
             if (square.getAdjacent() == 0) {
-              board.uncoverAdjacent(xCor,yCor);
+              board.uncoverAdjacent(xCor, yCor);
             }
             //if the clicked on Space was a mine, the game is over
           } else {
@@ -87,18 +108,18 @@ void mouseClicked() {
       if (mouseButton == RIGHT) {
         if (square.getCovered()) {
           square.changeFlag();
-          if(square.flag){
-            unflaggedMines--;
-        }else{
-          unflaggedMines++;
-      }
-      displayMineCount();
+          if (square.flag) {
+            board.unflaggedMines--;
+          } else {
+            board.unflaggedMines++;
+          }
+          displayMineCount();
         }
+      }
     }
   }
-  }
-  /*restarts the game if the game over screen is being shown and the user clicks on the 
-  area of the restart button*/
+  /*restarts the game if the game over screen is being shown and the user clicks on the
+   area of the restart button*/
   if (gameOverShown) {
     if (mouseX >= customBoardX && mouseX <= customBoardX+customBoardWidth && mouseY >= customBoardY && mouseX <= customBoardY+customBoardHeight) {
       gameOverShown = false;
@@ -110,7 +131,7 @@ void mouseClicked() {
       customBoardScreenShown = true;
     }
     else if (mouseX >= restartX && mouseX <= restartX+restartWidth && mouseY >= restartY && mouseX <= restartY+restartHeight) {
-      drawGame();
+      drawGame(16,16,40);
     }
   }
   if (customBoardScreenShown){
@@ -149,6 +170,7 @@ void mouseClicked() {
       drawCustomBoardIntroScreen();
     }
     if (mouseX >= startX + 215 && mouseX <= startX + 215 + 80 && mouseY >= startY + 265 && mouseY <= startY + 265 + 30){
+      customBoardScreenShown = false;
       drawGame(customBoardWidth, customBoardHeight,customBoardMines);
     }
   }
@@ -161,23 +183,28 @@ void mouseClicked() {
 }
 
 //displays the restart button at the top left
-void drawButton() {
-  optX = 10;
-  optY = 0;
-  optSizeX = 50;
-  optSizeY = 15;
+void drawButtons() {
+  drawButton(optX, optY, optSizeX, optSizeY, "OPTIONS");
+  noFill();
+  if (!optCollapsed) {
+    drawButton(optX, restartOptY, optSizeX, restartOptSizeY, "RESTART");
+    drawButton(optX, optY+optSizeY*2, optSizeX, optSizeY, "Custom");
+  }
+}
+
+void drawButton(int x, int y, int widthB, int heightB, String text) {
   fill(124);
-  rect(optX, optY, optSizeX, optSizeY);
+  rect(x, y, widthB, heightB);
   fill(0);
   textAlign(LEFT);
   textSize(12);
-  text("RESTART", optX+2, optY+10);
+  text(text, x+2, y+10);
   noFill();
 }
 
+
 //displays the game over screen
 void drawGameOver() {
-  time = millis();
   gamesPlayed++;
   gameOverShown = true;
   //sets size of the screen and draw its outline
@@ -229,6 +256,7 @@ void drawGameOver() {
 /*displays the pre-custom game screen asking for the measurements and number 
 of mines for the custom board*/
 void drawCustomBoardIntroScreen(){
+  background(66, 179, 139);
   int widthB = 300;
   int heightB = 300;
   int startX = (board.bWidth*sizeSquare-widthB)/2+offsetX;
@@ -244,7 +272,7 @@ void drawCustomBoardIntroScreen(){
   restartY=startY+0.25*heightB-0.5*restartHeight;
   rect(restartX, restartY, 70, 30);
   fill(0);
-  text("Width: " + customBoardWidth, startX+0.4*widthB, startY+0.27*heightB);
+  text("Width: " + customBoardWidth, startX+0.43*widthB, startY+0.27*heightB);
   noFill();
   rectMode(CORNER);
   
@@ -261,7 +289,7 @@ void drawCustomBoardIntroScreen(){
   restartY=startY+0.50*heightB-0.5*restartHeight;
   rect(restartX, restartY, 70, 30);
   fill(0);
-  text("Height: " + customBoardHeight, startX+0.4*widthB, startY+0.52*heightB);
+  text("Height: " + customBoardHeight, startX+0.43*widthB, startY+0.52*heightB);
   noFill();
   rectMode(CORNER);
   
@@ -277,7 +305,7 @@ void drawCustomBoardIntroScreen(){
   restartY=startY+0.75*heightB-0.5*restartHeight;
   rect(restartX, restartY, 70, 30);
   fill(0);
-  text("Mines: " + customBoardMines, startX+0.4*widthB, startY+0.77*heightB);
+  text("Mines: " + customBoardMines, startX+0.43*widthB, startY+0.77*heightB);
   noFill();
   rectMode(CORNER);
   
@@ -294,31 +322,21 @@ void drawCustomBoardIntroScreen(){
   text("Create Game", startX + 220, startY + 285);
   noFill();
   rectMode(CORNER);
+
+  text("Games played: " + gamesPlayed, startX+0.5*widthB, startY+0.05*heightB);
+  text("Games won: " + gamesWon, startX+0.5*widthB, startY+0.1*heightB);
+  text("Win rate: " + Math.round(gamesWon/gamesPlayed*10000)/100 + "%", startX+0.5*widthB, startY+0.15*heightB);
 }
 
-/*draws a board with the restart button on the top left and says the game over 
-screen is not being shown*/
-void drawGame() {
+/*draws a board with the restart button on the top left and says the game over
+ screen is not being shown*/
+void drawGame(int bWidth, int bHeight, int mines) {
   background(66, 179, 139);
   optCollapsed = true;
-  drawButton();
-  board = new Board(16, 16, 40);
+  drawButtons();
+  board = new Board(bWidth, bHeight, mines);
   gameOverShown = false;
   unflaggedMines = 40;
-  displayMineCount();
-  time = millis();
-  displayTime();
-}
-
-/*draws a custom board with the restart button on the top left and says the game over 
-screen is not being shown*/
-void drawGame(int W, int H, int M) {
-  background(66, 179, 139);
-  optCollapsed = true;
-  drawButton();
-  board = new Board(W, H, M);
-  gameOverShown = false;
-  unflaggedMines = M;
   displayMineCount();
   time = millis();
   displayTime();
@@ -328,39 +346,101 @@ void drawGame(int W, int H, int M) {
 void keyPressed() {
   if (keyCode == 's' || keyCode == 'S') {
     board.showMostSafe();
-    unflaggedMines = 0;
+    board.unflaggedMines = 0;
     displayMineCount();
+  }
+  if (keyCode == 'h' || keyCode == 'H') {
+    drawGame(16,16,40);
   }
 }
 
 //shows number of mines minus the number of flags
-void displayMineCount(){
+void displayMineCount() {
   noStroke();
   fill(66, 179, 139);
   rectMode(CORNER);
-  rect(optX+optSizeX+10,optY,70,10);
+  rect(optX+optSizeX+10, optY, 70, 10);
   stroke(0);
   textAlign(LEFT);
   textSize(13);
   fill(0);
-  text("Mines: " + unflaggedMines,optX+optSizeX+10,optY+10);
+  text("Mines: " + board.unflaggedMines, optX+optSizeX+10, optY+10);
   noFill();
 }
 
-void displayTime(){
+void displayTime() {
+  System.out.println("millis: " + millis()/1000);
+  //System.out.println(time2/1000);
   noStroke();
   fill(66, 179, 139);
   rectMode(CORNER);
-  rect(optX+optSizeX+100,optY,30,10);
+  rect(optX+optSizeX+100, optY, 30, 10);
   stroke(0);
   textAlign(LEFT);
   textSize(13);
   fill(0);
   String sec = ((millis()-time)%60000/1000)+"";
-  if (Integer.parseInt(sec) < 10){
+  if (Integer.parseInt(sec) < 10) {
     sec = 0 + sec;
   }
-  text((millis()-time)%(60000*60)/60000 + ":" + sec,optX+optSizeX+100,optY+10);
+  text((millis()-time)%(60000*60)/60000 + ":" + sec, optX+optSizeX+100, optY+10);
   noFill();
 }
-  
+
+void optionsInteractions() {
+  if(!optCollapsed){
+    if (mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY+optSizeY && mouseY <= optY+2*optSizeY) {
+      drawGame(customBoardWidth, customBoardHeight, customBoardMines);
+      clicked = true;
+    }else if ( mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY+2*optSizeY && mouseY <= optY+3*optSizeY){
+      optCollapsed = true;
+      clicked = true;
+      rectMode(CORNERS);
+      fill(66, 179, 139);
+      noStroke();
+      rect(optX,optY+optSizeY+1,optX+optSizeX+1,offsetY);
+      stroke(0);
+      noFill();
+      rectMode(CORNER);
+      board.drawBoard();
+      customBoardShown = true;
+      drawCustomBoardIntroScreen();
+    }
+  }
+  //if you click on the Options button, collapse/uncollapse it
+  if (mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY && mouseY <= optY+optSizeY) {
+    if (optCollapsed) {
+      optCollapsed = false;
+      drawButtons();
+    } else {
+      optCollapsed = true;
+      rectMode(CORNERS);
+      fill(66, 179, 139);
+      noStroke();
+      rect(optX,optY+optSizeY+1,optX+optSizeX+1,offsetY);
+      stroke(0);
+      noFill();
+      rectMode(CORNER);
+      board.drawBoard();
+    }
+  }
+}
+
+/*
+void redrawBoard(){
+  background(66, 179, 139);
+  drawButtons();
+  displayMineCount();
+  displayTime();
+  board.drawBoard();
+  customBoardShown = false;
+  clicked = false;
+  time1 = millis();
+  time2 = actTime;
+}
+*/
+/*
+ok plan:
+two time variables
+every time game resumes, reset time2 variable. 
+add old time to millis-time2*/
