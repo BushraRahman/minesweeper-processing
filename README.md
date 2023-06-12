@@ -11,3 +11,4 @@ Unclicked on squares are peach. Flagged squares are peach with a red square. Rev
 Right-click a square to add or remove a flag.
 Click on a square to open it.
 Click on a button labelled "RESTART" to play with another board of the same size with a different configuration of mines.
+Click on a button labelled "Custom Game" to play with another board of a custom configuration. Pressing the button will open a screen with 3 controls for width, height, and mines. Toggle the arrows to set the desired board configuration and press "Create Game" to start.
