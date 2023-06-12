@@ -127,15 +127,16 @@ void mouseClicked() {
       
       customBoardWidth = board.bWidth;
       customBoardHeight = board.bHeight;
-      customBoardMines = 45;
+      //customBoardMines = 45;
       
       drawCustomBoardIntroScreen();
       customBoardScreenShown = true;
     }
     else if (mouseX >= restartX && mouseX <= restartX+restartWidth && mouseY >= restartY && mouseX <= restartY+restartHeight) {
-      drawGame(16,16,40);
+      drawGame(customBoardWidth,customBoardHeight,customBoardMines);
     }
   }
+  //changes board setting before creating a new custom board
   if (customBoardScreenShown){
     int widthB = 300;
     int heightB = 300;
@@ -148,7 +149,7 @@ void mouseClicked() {
       drawCustomBoardIntroScreen();
     }
     if (mouseX >= restartXW + 70 - 5 && mouseX <= restartXW + 70 + 35 && mouseY >= restartYW && mouseY <= restartYW + 30){
-      if (customBoardWidth < 30) customBoardWidth += 1;
+      if (customBoardWidth < 25) customBoardWidth += 1;
       drawCustomBoardIntroScreen();
     }
     float restartXH = startX+0.5*widthB-0.5*restartWidth;
@@ -158,13 +159,13 @@ void mouseClicked() {
       drawCustomBoardIntroScreen();
     }
     if (mouseX >= restartXH + 70 - 5 && mouseX <= restartXH + 70 + 35 && mouseY >= restartYH && mouseY <= restartYH + 30){
-      if (customBoardHeight < 16) customBoardHeight += 1;
+      if (customBoardHeight < 25) customBoardHeight += 1;
       drawCustomBoardIntroScreen();
     }
     float restartXM = startX+0.5*widthB-0.5*restartWidth;
     float restartYM = startY+0.75*heightB-0.5*restartHeight;
     if (mouseX <= restartXM - 5 && mouseX >= restartXM - 35 && mouseY >= restartYM && mouseY <= restartYM + 30){
-      if (customBoardMines > 10) customBoardMines -= 1;
+      if (customBoardMines > 16) customBoardMines -= 1;
       drawCustomBoardIntroScreen();
     }
     if (mouseX >= restartXM + 70 - 5 && mouseX <= restartXM + 70 + 35 && mouseY >= restartYM && mouseY <= restartYM + 30){
@@ -190,7 +191,6 @@ void drawButtons() {
   noFill();
   if (!optCollapsed) {
     drawButton(optX, restartOptY, optSizeX, restartOptSizeY, "RESTART");
-    drawButton(optX, optY+optSizeY*2, optSizeX, optSizeY, "Custom");
   }
 }
 
@@ -371,7 +371,7 @@ void displayMineCount() {
 }
 
 void displayTime() {
-  System.out.println("millis: " + millis()/1000);
+  //System.out.println("millis: " + millis()/1000);
   //System.out.println(time2/1000);
   noStroke();
   fill(66, 179, 139);
@@ -390,25 +390,7 @@ void displayTime() {
 }
 
 void optionsInteractions() {
-  if(!optCollapsed){
-    if (mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY+optSizeY && mouseY <= optY+2*optSizeY) {
-      drawGame(customBoardWidth, customBoardHeight, customBoardMines);
-      clicked = true;
-    }else if ( mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY+2*optSizeY && mouseY <= optY+3*optSizeY){
-      optCollapsed = true;
-      clicked = true;
-      rectMode(CORNERS);
-      fill(66, 179, 139);
-      noStroke();
-      rect(optX,optY+optSizeY+1,optX+optSizeX+1,offsetY);
-      stroke(0);
-      noFill();
-      rectMode(CORNER);
-      board.drawBoard();
-      customBoardScreenShown = true;
-      drawCustomBoardIntroScreen();
-    }
-  }
+  
   //if you click on the Options button, collapse/uncollapse it
   if (mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY && mouseY <= optY+optSizeY) {
     if (optCollapsed) {
@@ -425,6 +407,12 @@ void optionsInteractions() {
       rectMode(CORNER);
       //board.drawBoard();
       drawGame(16,16,40);
+    }
+  }
+  if(!optCollapsed){
+    if (mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY+optSizeY && mouseY <= optY+2*optSizeY) {
+      drawGame(customBoardWidth, customBoardHeight, customBoardMines);
+      clicked = true;
     }
   }
 }
