@@ -85,3 +85,7 @@
 
 ### June 7
 - Created custom game screen, shows dimensions
+
+### June 12
+- Finished custom game screen
+- Added controls to increase and decrease dimensions and mine count

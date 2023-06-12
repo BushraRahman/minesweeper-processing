@@ -21,7 +21,7 @@ int customBoardHeight;
 int unflaggedMines;
 int time;
 int customBoardMines;
-boolean customGameScreenShown;
+boolean customBoardScreenShown;
 Board board;
 
 void setup() {
@@ -100,20 +100,61 @@ void mouseClicked() {
   /*restarts the game if the game over screen is being shown and the user clicks on the 
   area of the restart button*/
   if (gameOverShown) {
-    if (mouseX >= restartX && mouseX <= restartX+restartWidth && mouseY >= restartY && mouseX <= restartY+restartHeight) {
+    if (mouseX >= customBoardX && mouseX <= customBoardX+customBoardWidth && mouseY >= customBoardY && mouseX <= customBoardY+customBoardHeight) {
+      gameOverShown = false;
+      background(66, 179, 139);
+      customBoardWidth = 20;
+      customBoardHeight = 20;
+      customBoardMines = 45;
+      drawCustomBoardIntroScreen();
+      customBoardScreenShown = true;
+    }
+    else if (mouseX >= restartX && mouseX <= restartX+restartWidth && mouseY >= restartY && mouseX <= restartY+restartHeight) {
       drawGame();
     }
-    if (mouseX >= customBoardX && mouseX <= customBoardX+customBoardWidth && mouseY >= customBoardY && mouseX <= customBoardY+customBoardHeight) {
-      customBoardWidth = 16;
-      customBoardHeight = 16;
-      customBoardMines = 40;
+  }
+  if (customBoardScreenShown){
+    int widthB = 300;
+    int heightB = 300;
+    int startX = (board.bWidth*sizeSquare-widthB)/2+offsetX;
+    int startY = (board.bHeight*sizeSquare-heightB)/2+offsetY;
+    float restartXW = startX+0.5*widthB-0.5*restartWidth;
+    float restartYW = startY+0.25*heightB-0.5*restartHeight;
+    if (mouseX <= restartXW - 5 && mouseX >= restartXW - 35 && mouseY >= restartYW && mouseY <= restartYW + 30){
+      if (customBoardWidth > 16) customBoardWidth -= 1;
       drawCustomBoardIntroScreen();
-      //drawGame(customBoardWidth, customBoardHeight, customBoardMines);
+    }
+    if (mouseX >= restartXW + 70 - 5 && mouseX <= restartXW + 70 + 35 && mouseY >= restartYW && mouseY <= restartYW + 30){
+      if (customBoardWidth < 25) customBoardWidth += 1;
+      drawCustomBoardIntroScreen();
+    }
+    float restartXH = startX+0.5*widthB-0.5*restartWidth;
+    float restartYH = startY+0.5*heightB-0.5*restartHeight;
+    if (mouseX <= restartXH - 5 && mouseX >= restartXH - 35 && mouseY >= restartYH && mouseY <= restartYH + 30){
+      if (customBoardHeight > 16) customBoardHeight -= 1;
+      drawCustomBoardIntroScreen();
+    }
+    if (mouseX >= restartXH + 70 - 5 && mouseX <= restartXH + 70 + 35 && mouseY >= restartYH && mouseY <= restartYH + 30){
+      if (customBoardHeight < 25) customBoardHeight += 1;
+      drawCustomBoardIntroScreen();
+    }
+    float restartXM = startX+0.5*widthB-0.5*restartWidth;
+    float restartYM = startY+0.75*heightB-0.5*restartHeight;
+    if (mouseX <= restartXM - 5 && mouseX >= restartXM - 35 && mouseY >= restartYM && mouseY <= restartYM + 30){
+      if (customBoardMines > 25) customBoardMines -= 1;
+      drawCustomBoardIntroScreen();
+    }
+    if (mouseX >= restartXM + 70 - 5 && mouseX <= restartXM + 70 + 35 && mouseY >= restartYM && mouseY <= restartYM + 30){
+      if (customBoardMines < 50) customBoardMines += 1;
+      drawCustomBoardIntroScreen();
+    }
+    if (mouseX >= startX + 215 && mouseX <= startX + 215 + 80 && mouseY >= startY + 265 && mouseY <= startY + 265 + 30){
+      drawGame(customBoardWidth, customBoardHeight,customBoardMines);
     }
   }
   /*if the game is over and the game over screen isn't being shown yet
   display all mines and display the game over screen*/
-  if (board.gameOver && !gameOverShown) {
+  else if (board.gameOver && !gameOverShown) {
     board.displayMines();
     drawGameOver();
   }
@@ -180,6 +221,7 @@ void drawGameOver() {
   text("NEW CUSTOM GAME", startX+0.5*widthB, startY+0.75*heightB);
   noFill();
   rectMode(CORNER);
+  
   //displays the game statistics
   text("Games played: " + gamesPlayed, startX+0.5*widthB, startY+0.35*heightB);
   text("Games won: " + gamesWon, startX+0.5*widthB, startY+0.3*heightB);
@@ -206,6 +248,12 @@ void drawCustomBoardIntroScreen(){
   noFill();
   rectMode(CORNER);
   
+  //Arrows to shift numbers up and down
+  fill(0);
+  triangle(restartX - 5,restartY,restartX - 5, restartY + 30, restartX - 35, restartY + 15);
+  triangle(restartX + 70 + 5,restartY,restartX + 70 + 5, restartY + 30, restartX + 70 + 35, restartY + 15);
+  noFill();
+  
   //box showing height of new board
   fill(255, 200);
   rectMode(CORNER);
@@ -217,6 +265,11 @@ void drawCustomBoardIntroScreen(){
   noFill();
   rectMode(CORNER);
   
+  fill(0);
+  triangle(restartX - 5,restartY,restartX - 5, restartY + 30, restartX - 35, restartY + 15);
+  triangle(restartX + 70 + 5,restartY,restartX + 70 + 5, restartY + 30, restartX + 70 + 35, restartY + 15);
+  noFill();
+  
   //box showing mines of new board
   fill(255, 200);
   rectMode(CORNER);
@@ -225,6 +278,20 @@ void drawCustomBoardIntroScreen(){
   rect(restartX, restartY, 70, 30);
   fill(0);
   text("Mines: " + customBoardMines, startX+0.4*widthB, startY+0.77*heightB);
+  noFill();
+  rectMode(CORNER);
+  
+  fill(0);
+  triangle(restartX - 5,restartY,restartX - 5, restartY + 30, restartX - 35, restartY + 15);
+  triangle(restartX + 70 + 5,restartY,restartX + 70 + 5, restartY + 30, restartX + 70 + 35, restartY + 15);
+  noFill();
+  
+  //Create Game Button
+  fill(255,200);
+  rectMode(CORNER);
+  rect(startX + 215, startY + 265, 80,30);
+  fill(0);
+  text("Create Game", startX + 220, startY + 285);
   noFill();
   rectMode(CORNER);
 }
