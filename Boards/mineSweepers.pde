@@ -121,7 +121,7 @@ void mouseClicked() {
   /*restarts the game if the game over screen is being shown and the user clicks on the
    area of the restart button*/
   if (gameOverShown) {
-    if (mouseX >= customBoardX && mouseX <= customBoardX+customBoardWidth && mouseY >= customBoardY && mouseX <= customBoardY+customBoardHeight) {
+    if (mouseX >= customBoardX && mouseX <= customBoardX+180 && mouseY >= customBoardY && mouseX <= customBoardY+30) {
       gameOverShown = false;
       background(66, 179, 139);
       
@@ -242,12 +242,10 @@ void drawGameOver() {
   fill(255, 200);
   rectMode(CORNER);
   
-  int customBoardButtonWidth=180;
-  int customBoardButtonHeight=30;
   
-  customBoardX=startX+0.5*widthB - 0.5*customBoardButtonWidth;
-  customBoardY=startY+0.725*heightB - 0.5*customBoardButtonHeight;
-  rect(customBoardX, customBoardY, customBoardButtonWidth, customBoardButtonHeight);
+  customBoardX=startX+0.5*widthB - 0.5*180;
+  customBoardY=startY+0.725*heightB - 0.5*30;
+  rect(customBoardX, customBoardY, 180, 30);
   fill(0);
   text("NEW CUSTOM GAME", startX+0.5*widthB, startY+0.75*heightB);
   noFill();
