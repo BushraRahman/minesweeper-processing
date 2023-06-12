@@ -185,7 +185,7 @@ void mouseClicked() {
     drawGameOver();
   }
 }
-
+}
 //displays the restart button at the top left
 void drawButtons() {
   drawButton(optX, optY, optSizeX, optSizeY, "OPTIONS");
@@ -416,21 +416,7 @@ void optionsInteractions() {
     if (mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY+optSizeY && mouseY <= optY+2*optSizeY) {
       drawGame(customBoardWidth, customBoardHeight, customBoardMines);
       clicked = true;
-    }/*else if ( mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY+2*optSizeY && mouseY <= optY+3*optSizeY){
-      optCollapsed = true;
-      clicked = true;
-      rectMode(CORNERS);
-      fill(66, 179, 139);
-      noStroke();
-      rect(optX,optY+optSizeY+1,optX+optSizeX+1,offsetY);
-      stroke(0);
-      noFill();
-      rectMode(CORNER);
-      board.drawBoard();
-      customBoardScreenShown = true;
-      drawCustomBoardIntroScreen();
-    }*/
-    //if the options menu is open but the restart button wasn't clicked on, collapse it
+    }
   }
 }
 
