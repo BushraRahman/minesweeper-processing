@@ -127,13 +127,13 @@ void mouseClicked() {
       
       customBoardWidth = board.bWidth;
       customBoardHeight = board.bHeight;
-      customBoardMines = 45;
+      //customBoardMines = 45;
       
       drawCustomBoardIntroScreen();
       customBoardScreenShown = true;
     }
     else if (mouseX >= restartX && mouseX <= restartX+restartWidth && mouseY >= restartY && mouseX <= restartY+restartHeight) {
-      drawGame(16,16,40);
+      drawGame(customBoardWidth,customBoardHeight,customBoardMines);
     }
   }
   if (customBoardScreenShown){
@@ -190,7 +190,6 @@ void drawButtons() {
   noFill();
   if (!optCollapsed) {
     drawButton(optX, restartOptY, optSizeX, restartOptSizeY, "RESTART");
-    drawButton(optX, optY+optSizeY*2, optSizeX, optSizeY, "Custom");
   }
 }
 
@@ -390,25 +389,7 @@ void displayTime() {
 }
 
 void optionsInteractions() {
-  if(!optCollapsed){
-    if (mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY+optSizeY && mouseY <= optY+2*optSizeY) {
-      drawGame(customBoardWidth, customBoardHeight, customBoardMines);
-      clicked = true;
-    }else if ( mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY+2*optSizeY && mouseY <= optY+3*optSizeY){
-      optCollapsed = true;
-      clicked = true;
-      rectMode(CORNERS);
-      fill(66, 179, 139);
-      noStroke();
-      rect(optX,optY+optSizeY+1,optX+optSizeX+1,offsetY);
-      stroke(0);
-      noFill();
-      rectMode(CORNER);
-      board.drawBoard();
-      customBoardScreenShown = true;
-      drawCustomBoardIntroScreen();
-    }
-  }
+  
   //if you click on the Options button, collapse/uncollapse it
   if (mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY && mouseY <= optY+optSizeY) {
     if (optCollapsed) {
@@ -425,6 +406,12 @@ void optionsInteractions() {
       rectMode(CORNER);
       //board.drawBoard();
       drawGame(16,16,40);
+    }
+  }
+  if(!optCollapsed){
+    if (mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY+optSizeY && mouseY <= optY+2*optSizeY) {
+      drawGame(customBoardWidth, customBoardHeight, customBoardMines);
+      clicked = true;
     }
   }
 }
