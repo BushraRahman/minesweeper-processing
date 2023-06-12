@@ -285,6 +285,9 @@ void drawCustomBoardIntroScreen(){
   triangle(restartX - 5,restartY,restartX - 5, restartY + 30, restartX - 35, restartY + 15);
   triangle(restartX + 70 + 5,restartY,restartX + 70 + 5, restartY + 30, restartX + 70 + 35, restartY + 15);
   noFill();
+  rect(restartX - 35, restartY, 30,30);
+  rect(restartX + 70 + 5, restartY, 30,30);
+  noFill();
   
   //box showing height of new board
   fill(255, 200);
@@ -301,6 +304,9 @@ void drawCustomBoardIntroScreen(){
   triangle(restartX - 5,restartY,restartX - 5, restartY + 30, restartX - 35, restartY + 15);
   triangle(restartX + 70 + 5,restartY,restartX + 70 + 5, restartY + 30, restartX + 70 + 35, restartY + 15);
   noFill();
+  rect(restartX - 35, restartY, 30,30);
+  rect(restartX + 70 + 5, restartY, 30,30);
+  noFill();
   
   //box showing mines of new board
   fill(255, 200);
@@ -316,6 +322,9 @@ void drawCustomBoardIntroScreen(){
   fill(0);
   triangle(restartX - 5,restartY,restartX - 5, restartY + 30, restartX - 35, restartY + 15);
   triangle(restartX + 70 + 5,restartY,restartX + 70 + 5, restartY + 30, restartX + 70 + 35, restartY + 15);
+  noFill();
+  rect(restartX - 35, restartY, 30,30);
+  rect(restartX + 70 + 5, restartY, 30,30);
   noFill();
   
   //Create Game Button
