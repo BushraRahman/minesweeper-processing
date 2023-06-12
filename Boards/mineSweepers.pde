@@ -127,7 +127,7 @@ void mouseClicked() {
       
       customBoardWidth = board.bWidth;
       customBoardHeight = board.bHeight;
-      customBoardMines = 45;
+      //customBoardMines = 45;
       
       drawCustomBoardIntroScreen();
       customBoardScreenShown = true;
@@ -144,7 +144,9 @@ void mouseClicked() {
     float restartXW = startX+0.5*widthB-0.5*restartWidth;
     float restartYW = startY+0.25*heightB-0.5*restartHeight;
     if (mouseX <= restartXW - 5 && mouseX >= restartXW - 35 && mouseY >= restartYW && mouseY <= restartYW + 30){
-      if (customBoardWidth > 8) customBoardWidth -= 1;
+      if (customBoardWidth > 8){
+        customBoardWidth -= 1;
+        //customBoardMines = Math.min(customBoardMines,
       drawCustomBoardIntroScreen();
     }
     if (mouseX >= restartXW + 70 - 5 && mouseX <= restartXW + 70 + 35 && mouseY >= restartYW && mouseY <= restartYW + 30){
@@ -190,7 +192,7 @@ void drawButtons() {
   noFill();
   if (!optCollapsed) {
     drawButton(optX, restartOptY, optSizeX, restartOptSizeY, "RESTART");
-    drawButton(optX, optY+optSizeY*2, optSizeX, optSizeY, "Custom");
+    //drawButton(optX, optY+optSizeY*2, optSizeX, optSizeY, "Custom");
   }
 }
 
@@ -392,11 +394,29 @@ void displayTime() {
 }
 
 void optionsInteractions() {
+  //if you click on the Options button, collapse/uncollapse it
+  if (mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY && mouseY <= optY+optSizeY) {
+    if (optCollapsed) {
+      optCollapsed = false;
+      drawButtons();
+    }else{
+      optCollapsed = true;
+      rectMode(CORNERS);
+      fill(66, 179, 139);
+      noStroke();
+      rect(optX,optY+optSizeY+1,optX+optSizeX+1,offsetY);
+      stroke(0);
+      noFill();
+      rectMode(CORNER);
+      board.drawBoard();
+  }
+  }
   if(!optCollapsed){
+    //test if you clicked on the restart button
     if (mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY+optSizeY && mouseY <= optY+2*optSizeY) {
       drawGame(customBoardWidth, customBoardHeight, customBoardMines);
       clicked = true;
-    }else if ( mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY+2*optSizeY && mouseY <= optY+3*optSizeY){
+    }/*else if ( mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY+2*optSizeY && mouseY <= optY+3*optSizeY){
       optCollapsed = true;
       clicked = true;
       rectMode(CORNERS);
@@ -409,24 +429,8 @@ void optionsInteractions() {
       board.drawBoard();
       customBoardScreenShown = true;
       drawCustomBoardIntroScreen();
-    }
-  }
-  //if you click on the Options button, collapse/uncollapse it
-  if (mouseX >= optX && mouseX <= optX+optSizeX && mouseY >= optY && mouseY <= optY+optSizeY) {
-    if (optCollapsed) {
-      optCollapsed = false;
-      drawButtons();
-    } else {
-      optCollapsed = true;
-      rectMode(CORNERS);
-      fill(66, 179, 139);
-      noStroke();
-      rect(optX,optY+optSizeY+1,optX+optSizeX+1,offsetY);
-      stroke(0);
-      noFill();
-      rectMode(CORNER);
-      board.drawBoard();
-    }
+    }*/
+    //if the options menu is open but the restart button wasn't clicked on, collapse it
   }
 }
 
