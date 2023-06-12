@@ -56,6 +56,10 @@
 -Made the timer stop when the game is over
 -Changed the appearance of wrongly flagged Spaces
 
+### June 11
+-Finished working on the buttons
+-Added game statistics to game over screen
+
 ## Que, Danielle
 
 ### May 22
