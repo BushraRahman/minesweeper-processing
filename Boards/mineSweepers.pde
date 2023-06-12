@@ -136,6 +136,7 @@ void mouseClicked() {
       drawGame(16,16,40);
     }
   }
+  //changes board setting before creating a new custom board
   if (customBoardScreenShown){
     int widthB = 300;
     int heightB = 300;
@@ -148,7 +149,7 @@ void mouseClicked() {
       drawCustomBoardIntroScreen();
     }
     if (mouseX >= restartXW + 70 - 5 && mouseX <= restartXW + 70 + 35 && mouseY >= restartYW && mouseY <= restartYW + 30){
-      if (customBoardWidth < 30) customBoardWidth += 1;
+      if (customBoardWidth < 25) customBoardWidth += 1;
       drawCustomBoardIntroScreen();
     }
     float restartXH = startX+0.5*widthB-0.5*restartWidth;
@@ -158,13 +159,13 @@ void mouseClicked() {
       drawCustomBoardIntroScreen();
     }
     if (mouseX >= restartXH + 70 - 5 && mouseX <= restartXH + 70 + 35 && mouseY >= restartYH && mouseY <= restartYH + 30){
-      if (customBoardHeight < 16) customBoardHeight += 1;
+      if (customBoardHeight < 25) customBoardHeight += 1;
       drawCustomBoardIntroScreen();
     }
     float restartXM = startX+0.5*widthB-0.5*restartWidth;
     float restartYM = startY+0.75*heightB-0.5*restartHeight;
     if (mouseX <= restartXM - 5 && mouseX >= restartXM - 35 && mouseY >= restartYM && mouseY <= restartYM + 30){
-      if (customBoardMines > 10) customBoardMines -= 1;
+      if (customBoardMines > 16) customBoardMines -= 1;
       drawCustomBoardIntroScreen();
     }
     if (mouseX >= restartXM + 70 - 5 && mouseX <= restartXM + 70 + 35 && mouseY >= restartYM && mouseY <= restartYM + 30){
@@ -371,7 +372,7 @@ void displayMineCount() {
 }
 
 void displayTime() {
-  System.out.println("millis: " + millis()/1000);
+  //System.out.println("millis: " + millis()/1000);
   //System.out.println(time2/1000);
   noStroke();
   fill(66, 179, 139);
