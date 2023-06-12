@@ -55,7 +55,9 @@ void draw() {
 void mouseClicked() {
   clicked = false;
   //tests if the user clicked on the restart button on the top left
+  if(!customBoardShown){
   optionsInteractions();
+  }
   //tests if the game is ongoing and if the user didn't click to the left or above the board
   if (!board.gameOver && mouseY>=offsetY && mouseX>=offsetX && !clicked && !customBoardShown) {
     int yCor = (mouseY-offsetY)/sizeSquare;
@@ -183,6 +185,7 @@ void drawGameOver() {
   //displays the game statistics
   text("Games played: " + gamesPlayed, startX+0.5*widthB, startY+0.3*heightB);
   text("Games won: " + gamesWon, startX+0.5*widthB, startY+0.6*heightB);
+  text("Win rate: " + Math.round(gamesWon/gamesPlayed*10000)/100 + "%", startX+0.5*widthB, startY+0.7*heightB);
 }
 
 /*draws a board with the restart button on the top left and says the game over
