@@ -242,12 +242,12 @@ void drawGameOver() {
   fill(255, 200);
   rectMode(CORNER);
   
-  customBoardWidth=180;
-  customBoardHeight=30;
+  int customBoardButtonWidth=180;
+  int customBoardButtonHeight=30;
   
-  customBoardX=startX+0.5*widthB-0.5*customBoardWidth;
-  customBoardY=startY+0.725*heightB-0.5*customBoardHeight;
-  rect(customBoardX, customBoardY, customBoardWidth, customBoardHeight);
+  customBoardX=startX+0.5*widthB - 0.5*customBoardButtonWidth;
+  customBoardY=startY+0.725*heightB - 0.5*customBoardButtonHeight;
+  rect(customBoardX, customBoardY, customBoardButtonWidth, customBoardButtonHeight);
   fill(0);
   text("NEW CUSTOM GAME", startX+0.5*widthB, startY+0.75*heightB);
   noFill();
@@ -425,7 +425,8 @@ void optionsInteractions() {
       stroke(0);
       noFill();
       rectMode(CORNER);
-      board.drawBoard();
+      //board.drawBoard();
+      drawGame(16,16,40);
     }
   }
 }
