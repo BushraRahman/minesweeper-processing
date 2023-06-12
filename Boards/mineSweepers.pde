@@ -198,6 +198,7 @@ void drawGame(int bWidth, int bHeight, int mines) {
   gameOverShown = false;
   displayMineCount();
   time = millis();
+  customBoardShown = false;
   //displayTime();
 }
 
@@ -210,7 +211,7 @@ void keyPressed() {
     displayMineCount();
   }
   if (keyCode == 'h' || keyCode == 'H') {
-    //redrawBoard();
+    drawGame(16,16,40);
   }
 }
 
