@@ -59,6 +59,7 @@
 ### June 11
 -Finished working on the buttons
 -Added game statistics to game over screen
+-Fixed bugs with custom screen
 
 ## Que, Danielle
 

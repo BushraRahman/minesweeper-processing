@@ -155,7 +155,10 @@ void mouseClicked() {
     float restartXH = startX+0.5*widthB-0.5*restartWidth;
     float restartYH = startY+0.5*heightB-0.5*restartHeight;
     if (mouseX <= restartXH - 5 && mouseX >= restartXH - 35 && mouseY >= restartYH && mouseY <= restartYH + 30){
-      if (customBoardHeight > 8) customBoardHeight -= 1;
+      if (customBoardHeight > 8){
+        customBoardHeight -= 1;
+        customBoardMines = Math.min(customBoardMines,(customBoardHeight-1)*(customBoardWidth-1));
+      }
       drawCustomBoardIntroScreen();
     }
     if (mouseX >= restartXH + 70 - 5 && mouseX <= restartXH + 70 + 35 && mouseY >= restartYH && mouseY <= restartYH + 30){
@@ -165,7 +168,7 @@ void mouseClicked() {
     float restartXM = startX+0.5*widthB-0.5*restartWidth;
     float restartYM = startY+0.75*heightB-0.5*restartHeight;
     if (mouseX <= restartXM - 5 && mouseX >= restartXM - 35 && mouseY >= restartYM && mouseY <= restartYM + 30){
-      if (customBoardMines > 16) customBoardMines -= 1;
+      if (customBoardMines > 10) customBoardMines -= 1;
       drawCustomBoardIntroScreen();
     }
     if (mouseX >= restartXM + 70 - 5 && mouseX <= restartXM + 70 + 35 && mouseY >= restartYM && mouseY <= restartYM + 30){
@@ -285,6 +288,9 @@ void drawCustomBoardIntroScreen(){
   triangle(restartX - 5,restartY,restartX - 5, restartY + 30, restartX - 35, restartY + 15);
   triangle(restartX + 70 + 5,restartY,restartX + 70 + 5, restartY + 30, restartX + 70 + 35, restartY + 15);
   noFill();
+  rect(restartX - 35, restartY, 30,30);
+  rect(restartX + 70 + 5, restartY, 30,30);
+  noFill();
   
   //box showing height of new board
   fill(255, 200);
@@ -301,6 +307,9 @@ void drawCustomBoardIntroScreen(){
   triangle(restartX - 5,restartY,restartX - 5, restartY + 30, restartX - 35, restartY + 15);
   triangle(restartX + 70 + 5,restartY,restartX + 70 + 5, restartY + 30, restartX + 70 + 35, restartY + 15);
   noFill();
+  rect(restartX - 35, restartY, 30,30);
+  rect(restartX + 70 + 5, restartY, 30,30);
+  noFill();
   
   //box showing mines of new board
   fill(255, 200);
@@ -316,6 +325,9 @@ void drawCustomBoardIntroScreen(){
   fill(0);
   triangle(restartX - 5,restartY,restartX - 5, restartY + 30, restartX - 35, restartY + 15);
   triangle(restartX + 70 + 5,restartY,restartX + 70 + 5, restartY + 30, restartX + 70 + 35, restartY + 15);
+  noFill();
+  rect(restartX - 35, restartY, 30,30);
+  rect(restartX + 70 + 5, restartY, 30,30);
   noFill();
   
   //Create Game Button
