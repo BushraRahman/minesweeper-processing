@@ -27,7 +27,7 @@ int restartOptY;
 int restartOptSizeX;
 int restartOptSizeY;
 boolean clicked;
-boolean customBoardShown;
+//boolean customBoardShown;
 //int ms;
 Board board;
 
@@ -124,9 +124,11 @@ void mouseClicked() {
     if (mouseX >= customBoardX && mouseX <= customBoardX+customBoardWidth && mouseY >= customBoardY && mouseX <= customBoardY+customBoardHeight) {
       gameOverShown = false;
       background(66, 179, 139);
-      customBoardWidth = 20;
-      customBoardHeight = 20;
+      
+      customBoardWidth = board.bWidth;
+      customBoardHeight = board.bHeight;
       customBoardMines = 45;
+      
       drawCustomBoardIntroScreen();
       customBoardScreenShown = true;
     }
@@ -142,21 +144,21 @@ void mouseClicked() {
     float restartXW = startX+0.5*widthB-0.5*restartWidth;
     float restartYW = startY+0.25*heightB-0.5*restartHeight;
     if (mouseX <= restartXW - 5 && mouseX >= restartXW - 35 && mouseY >= restartYW && mouseY <= restartYW + 30){
-      if (customBoardWidth > 16) customBoardWidth -= 1;
+      if (customBoardWidth > 8) customBoardWidth -= 1;
       drawCustomBoardIntroScreen();
     }
     if (mouseX >= restartXW + 70 - 5 && mouseX <= restartXW + 70 + 35 && mouseY >= restartYW && mouseY <= restartYW + 30){
-      if (customBoardWidth < 25) customBoardWidth += 1;
+      if (customBoardWidth < 30) customBoardWidth += 1;
       drawCustomBoardIntroScreen();
     }
     float restartXH = startX+0.5*widthB-0.5*restartWidth;
     float restartYH = startY+0.5*heightB-0.5*restartHeight;
     if (mouseX <= restartXH - 5 && mouseX >= restartXH - 35 && mouseY >= restartYH && mouseY <= restartYH + 30){
-      if (customBoardHeight > 16) customBoardHeight -= 1;
+      if (customBoardHeight > 8) customBoardHeight -= 1;
       drawCustomBoardIntroScreen();
     }
     if (mouseX >= restartXH + 70 - 5 && mouseX <= restartXH + 70 + 35 && mouseY >= restartYH && mouseY <= restartYH + 30){
-      if (customBoardHeight < 25) customBoardHeight += 1;
+      if (customBoardHeight < 16) customBoardHeight += 1;
       drawCustomBoardIntroScreen();
     }
     float restartXM = startX+0.5*widthB-0.5*restartWidth;
@@ -239,8 +241,10 @@ void drawGameOver() {
   //displays the custom game button in the screen
   fill(255, 200);
   rectMode(CORNER);
+  
   customBoardWidth=180;
   customBoardHeight=30;
+  
   customBoardX=startX+0.5*widthB-0.5*customBoardWidth;
   customBoardY=startY+0.725*heightB-0.5*customBoardHeight;
   rect(customBoardX, customBoardY, customBoardWidth, customBoardHeight);
@@ -321,7 +325,7 @@ void drawCustomBoardIntroScreen(){
   rectMode(CORNER);
   rect(startX + 215, startY + 265, 80,30);
   fill(0);
-  text("Create Game", startX + 220, startY + 285);
+  text("Create Game", startX + 255, startY + 285);
   noFill();
   rectMode(CORNER);
 /*
@@ -339,7 +343,7 @@ void drawGame(int bWidth, int bHeight, int mines) {
   drawButtons();
   board = new Board(bWidth, bHeight, mines);
   gameOverShown = false;
-  unflaggedMines = 40;
+  unflaggedMines = customBoardMines;
   displayMineCount();
   time = millis();
   displayTime();
@@ -347,13 +351,10 @@ void drawGame(int bWidth, int bHeight, int mines) {
 
 //demo feature to show winning the game
 void keyPressed() {
-  if (keyCode == 's' || keyCode == 'S') {
+  if (keyCode == 's' || keyCode == 'S' && customBoardScreenShown == false) {
     board.showMostSafe();
     board.unflaggedMines = 0;
     displayMineCount();
-  }
-  if (keyCode == 'h' || keyCode == 'H') {
-    drawGame(16,16,40);
   }
 }
 
