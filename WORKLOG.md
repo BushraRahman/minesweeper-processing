@@ -114,5 +114,5 @@
 
 ### Content Resources
 - The Processing Reference: Very useful for learning about Inputs.
-- Google Minesweeper: Good reference material for minesweeper basics
--freeminesweeper.org Minesweeper: Good reference material for the graphics of minesweeper
+- Google Minesweeper: Good reference material for minesweeper basics.
+-freeminesweeper.org Minesweeper: Good reference material for the graphics of minesweeper.
