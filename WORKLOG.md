@@ -99,3 +99,19 @@
 ### June 12
 - Finished custom game screen
 - Added controls to increase and decrease dimensions and mine count
+
+## Dev Log
+
+### Working Features
+- Initializing the game: The screen opens to a 16x16 grid with 40 mines which the player can play like a normal minesweeper game to either complete & win or lose.
+- Game Over: Losing opens a screen that allows the player to restart or create a custom game. This screen also keeps track of games won and played.
+- Custom Game: The player has the ability to create custom games by changing the width and height (in terms of spaces) and number of mines. Once these are set, the player can create the new game.
+- Options Menu: The player can click on the options menu in the top left of the game screen to have the ability to restart with a new game.
+- Timer: The timer displays how long it is taking the player to solve the game.
+
+### Broken Features/Bugs
+- Clicking S: Hitting the S key is supposed to reveal all the mines except one. However, this feature works by not revealing the bottom right corner. There are times where this space is not a mine and is therefore revealed.
+
+### Content Resources
+- The Processing Reference: Very useful for learning about Inputs.
+- Google Minesweeper: Good reference material for minesweeper basics.
