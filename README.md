@@ -33,6 +33,4 @@ Toggle the arrows to set the desired board configuration and press "Create Game"
 
 
 
-https://github.com/user-attachments/assets/9fd80791-522a-43c6-9540-3bfa1cff5f69
-
 
