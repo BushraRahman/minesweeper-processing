@@ -17,7 +17,7 @@ Unclicked on squares are peach. Flagged squares are peach with a red square. Rev
   
 Squares that were incorrectly flagged are black with a red rectangle when the game is over.  
   
-When the game ends, players can create a custom game choosing between a width & height of 8-25 squares and a mine count between 16 and the product of one less of the chosen height times one less of the chosen width.  
+When the game ends, players can create a custom game choosing between a width & height of 8-25 squares and a mine count between 16 and the product of one less than the chosen height times one less than the chosen width.  
   
 Players choosing to restart in the middle of the game also have the option at the top left corner to restart on a new board of the same size as the previous board.  
 ## Instructions
